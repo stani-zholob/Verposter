@@ -1,4 +1,4 @@
-package de.hsos.vs;
+package de.hsos.vs.pages;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,13 +10,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * @author Stanislav
+ * @author Lukas
  */
-@WebServlet("/hello")
-public class Test extends HttpServlet {
+@WebServlet("/login")
+public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
-        out.println("<h1>Hello World!</h1>");
+        resp.sendRedirect("login.html");
     }
 }
