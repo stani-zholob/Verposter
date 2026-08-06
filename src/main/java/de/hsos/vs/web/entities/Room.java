@@ -1,4 +1,4 @@
-package de.hsos.vs.entities;
+package de.hsos.vs.web.entities;
 
 import jakarta.servlet.annotation.WebServlet;
 

@@ -1,4 +1,4 @@
-package de.hsos.vs.pages;
+package de.hsos.vs.web.game;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

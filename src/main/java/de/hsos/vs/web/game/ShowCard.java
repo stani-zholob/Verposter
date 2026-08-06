@@ -1,7 +1,7 @@
-package de.hsos.vs.pages;
+package de.hsos.vs.web.game;
 
-import de.hsos.vs.entities.Room;
-import de.hsos.vs.entities.User;
+import de.hsos.vs.web.entities.Room;
+import de.hsos.vs.web.entities.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
