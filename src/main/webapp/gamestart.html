@@ -1,4 +1,4 @@
-<!-- Diese Datei wurde mit KI generiert -->
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -9,16 +9,41 @@
 
 <h1>VERPOSTER</h1>
 
-<h2>Raum 2</h2>
 
-<p>Warten auf die anderen Spieler (3 von 4)</p>
+<p>Warten auf die anderen Spieler </p>
+<table border="1" cellpadding="5">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Player</th>
 
-<!-- Liste kommt spaeter aus dem Servlet -->
-<ul>
-    <li>Akim - bereit</li>
-    <li>Lukas - nicht bereit</li>
-    <li>Stani - bereit</li>
-</ul>
+    </tr>
+    </thead>
+
+    <tbody id="users-table">
+
+    </tbody>
+</table>
+
+<script>
+    async function getUsers(){
+        const resp = await fetch('/Verposter/api/users');
+        const users = await resp.json();
+        console.log(users);
+
+
+        const table = document.getElementById("users-table");
+        for(const user of users){
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${user.id}</td>
+                <td>${user.name}</td>
+                <td> <form action = "/showcard.html" method = "get"> <button type="button" name = "ready"> Ready </button> </form> </td>`;
+            table.append(row);
+        }
+    }
+    getUsers();
+</script>
 
 <p><button type="button">Ich bin bereit</button></p>
 

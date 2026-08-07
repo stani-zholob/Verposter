@@ -2,6 +2,7 @@ package de.hsos.vs.entities;
 
 
 import com.google.gson.Gson;
+import de.hsos.vs.services.LobbyService;
 import de.hsos.vs.web.entities.Room;
 import de.hsos.vs.web.entities.User;
 import jakarta.servlet.ServletException;
@@ -14,9 +15,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+/**
+ * @author Stanislav
+ */
 @WebServlet("/api/rooms/*")
 public class RoomServlet extends HttpServlet {
-    ArrayList<Room> rooms = new ArrayList<>();
+    LobbyService service = new LobbyService();
+    ArrayList<Room> rooms = service.getRooms();
 
     @Override
     public void init() throws ServletException {

@@ -1,6 +1,7 @@
 package de.hsos.vs.entities;
 
 import com.google.gson.Gson;
+import de.hsos.vs.services.LobbyService;
 import de.hsos.vs.web.entities.Room;
 import de.hsos.vs.web.entities.User;
 import jakarta.servlet.ServletException;
@@ -12,10 +13,14 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-
+/**
+ * @author Stanislav
+ */
 @WebServlet("/api/users/*")
 public class UserServlet extends HttpServlet {
-    ArrayList<User> users = new ArrayList<User>();
+
+    LobbyService service = new LobbyService();
+    ArrayList<User> users = service.getUsers();
 
     @Override
     public void init() throws ServletException {
@@ -25,6 +30,7 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
 
         resp.setContentType("application/json");
         Gson gson = new Gson();

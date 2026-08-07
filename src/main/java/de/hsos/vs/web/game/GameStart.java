@@ -16,5 +16,8 @@ import java.io.PrintWriter;
  */
 @WebServlet("/gamestart")
 public class GameStart extends HttpServlet {
-
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("/gamestart.html").forward(req, resp);
+    }
 }

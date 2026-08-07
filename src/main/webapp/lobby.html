@@ -10,16 +10,16 @@
 
 <h2>Lobbies</h2>
 
-<p><button type="button">+ Neue Lobby</button></p>
+<p><button type="button">+ New Lobby</button></p>
 
 
 
 <table border="1" cellpadding="5">
     <thead>
         <tr>
-            <th>Raum</th>
+            <th>Room</th>
             <th>Name</th>
-            <th>Spieler</th>
+            <th>Players</th>
 
         </tr>
     </thead>
@@ -42,7 +42,7 @@
             row.innerHTML = `
                 <td>${room.id}</td>
                 <td>${room.name}</td>
-                <td> <button type="button"> Beitreten </button> </td>`;
+                <td> <form action = "/gamestart.html" method = "get"> <button type="button" name = "join"> Join </button> </form> </td>`;
             table.append(row);
         }
     }
