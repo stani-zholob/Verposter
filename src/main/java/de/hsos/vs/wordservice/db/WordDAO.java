@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class WordDAO {
-
     public Word insert(int topicId, String word, String tip) throws SQLException {
         String sql = "INSERT INTO words(topicId, word, tip) VALUES(?, ?, ?)";
 
@@ -30,7 +29,6 @@ public class WordDAO {
             }
         }
     }
-
     /** Die n-Seite der Beziehung: alle Woerter eines Themas. */
     public List<Word> findByTopic(int topicId) throws SQLException {
         String sql = "SELECT id, topicId, word, tip FROM words WHERE topicId = ?";

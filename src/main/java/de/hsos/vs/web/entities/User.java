@@ -9,8 +9,7 @@ public class User {
     public User() {
     }
 
-    public User(int id, String name, String passwordHash) {
-        this.id = id;
+    public User( String name, String passwordHash) {
         this.name = name;
         this.passwordHash = passwordHash;
     }

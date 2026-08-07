@@ -2,10 +2,12 @@ package de.hsos.vs.wordservice;
 
 import de.hsos.vs.web.entities.Topic;
 import de.hsos.vs.web.entities.Word;
+
+
 import de.hsos.vs.wordservice.db.Database;
 import de.hsos.vs.wordservice.db.TopicDAO;
 import de.hsos.vs.wordservice.db.UserDAO;
-import de.hsos.vs.wordservice.db.WordDAO;
+//import de.hsos.vs.wordservice.db.WordDAO;
 
 import java.sql.SQLException;
 import java.util.List;

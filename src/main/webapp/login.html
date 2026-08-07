@@ -1,24 +1,35 @@
-<!-- Diese Datei wurde mit KI generiert -->
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Verposter - Anmelden</title>
+    <title>Verposter - Sign In</title>
 </head>
 <body>
 
 <h1>VERPOSTER</h1>
 
-<h2>Main Menu</h2>
+<h2>Sign In</h2>
 
 <p>
-    <label for="nickname">Your Nickname</label><br>
-    <input type="text" id="nickname" name="nickname" maxlength="20">
+    <form action = "/Verposter/login" method = "post">
+
+    <label for="username">Your Username</label><br>
+    <input type="text" id="username" name="username" maxlength="20"required>
+
+    <label for="password"></label><br>
+    <input type="text" id="password" name="password" maxlength="20" required>
+
 </p>
 
-<p>
-    <button type="button">Weiter</button>
-</p>
+<button> Login </button>
+</form>
+
+
+
+<form action = "/register" method = "get">
+<button> Register </button>
+</form>
 
 </body>
 </html>

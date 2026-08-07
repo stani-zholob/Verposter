@@ -14,14 +14,6 @@ import java.io.PrintWriter;
 /**
  * @author Lukas
  */
-@WebServlet("/showcard")
 public class ShowCard extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter out = resp.getWriter();
-        resp.sendRedirect("showcard.html");
-        User u = new User();
-        Room room = new Room(1);
-        room.addUser(u);
-    }
+
 }

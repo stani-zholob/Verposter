@@ -9,7 +9,6 @@ import java.util.List;
  * Einfache Entität für den Raum
  * @author Lukas
  */
-@WebServlet("/api/room/*")
 public class Room {
     private int id;
     private List<User> user;

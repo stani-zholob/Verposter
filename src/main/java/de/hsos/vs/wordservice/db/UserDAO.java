@@ -28,8 +28,7 @@ public class UserDAO {
             }
         }
     }
-
-    /** Fuer den Login: Benutzer per Name suchen. */
+    /* Fuer den Login: Benutzer per Name suchen. */
     public Optional<User> findByName(String name) throws SQLException {
         String sql = "SELECT id, name, password FROM users WHERE name = ?";
 

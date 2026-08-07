@@ -30,6 +30,7 @@ public class TopicDAO {
     }
 
     /** Alle Themen - z.B. fuer die Auswahl beim Spielstart. */
+
     public List<Topic> findAll() throws SQLException {
         String sql = "SELECT id, name FROM topics ORDER BY name";
         List<Topic> topics = new ArrayList<>();

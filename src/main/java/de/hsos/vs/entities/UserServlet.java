@@ -1,7 +1,5 @@
-package de.hsos.vs.web.game;
+package de.hsos.vs.entities;
 
-import de.hsos.vs.web.entities.Room;
-import de.hsos.vs.web.entities.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,8 +8,10 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 
-public class Lobby extends HttpServlet {
+public class UserServlet extends HttpServlet {
+
 
 }
