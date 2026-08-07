@@ -1,5 +1,8 @@
 package de.hsos.vs.entities;
 
+import com.google.gson.Gson;
+import de.hsos.vs.web.entities.Room;
+import de.hsos.vs.web.entities.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,8 +13,67 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-
+@WebServlet("/api/users/*")
 public class UserServlet extends HttpServlet {
+    ArrayList<User> users = new ArrayList<User>();
+
+    @Override
+    public void init() throws ServletException {
+        users.add(new User(1,"admin", "123"));
+        users.add(new User(2,"new", "1235"));
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        resp.setContentType("application/json");
+        Gson gson = new Gson();
+
+        int userId = getUserIndex(req);
+        if  (userId == -1) {
+            resp.getWriter().write((gson.toJson(users) + "\n"));
+            return;
+        }
+
+        User foundUser = null;
+        for (User user : users) {
+            if (user.getId() == userId) {
+                foundUser = user;
+                break;
+            }
+        }
+        resp.getWriter().write(gson.toJson(foundUser));
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
+        System.out.println("username = " + username);
+        System.out.println("password = " + password);
+
+        Gson gson = new Gson();
+        resp.setContentType("application/json");
+
+
+        User user = new User();
+
+//        PrintWriter out = resp.getWriter();
+//        out.write(gson.toJson(users));
+    }
+
+    protected int getUserIndex(HttpServletRequest request){
+        String pathLine = request.getPathInfo(); // da liegt jetzt /42
+        if (pathLine == null || pathLine.equals("/")) return -1; //  falls /api/users oder /api/users/
+
+        try {
+            String numberString = pathLine.replace("/", "");
+            return Integer.parseInt(numberString);
+        }catch (Exception e){
+            e.printStackTrace();
+            return -1;
+        }
+    }
 
 
 }

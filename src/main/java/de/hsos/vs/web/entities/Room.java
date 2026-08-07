@@ -11,21 +11,21 @@ import java.util.List;
  */
 public class Room {
     private int id;
-    private List<User> user;
+    private List<User> users;
 
 
 
     public Room(int id) {
         this.id = id;
-        this.user = new ArrayList<>();
+        this.users = new ArrayList<>();
     }
 
     public void addUser(User user) {
-        this.user.add(user);
+        this.users.add(user);
     }
 
     public void removeUser(User user) {
-        this.user.remove(user);
+        this.users.remove(user);
     }
 
     public int getId() {
@@ -37,10 +37,10 @@ public class Room {
     }
 
     public List<User> getUser() {
-        return user;
+        return users;
     }
 
     public void setUser(List<User> user) {
-        this.user = user;
+        this.users = user;
     }
 }

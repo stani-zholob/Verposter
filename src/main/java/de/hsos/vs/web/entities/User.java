@@ -9,7 +9,8 @@ public class User {
     public User() {
     }
 
-    public User( String name, String passwordHash) {
+    public User(int id, String name, String passwordHash) {
+        this.id = id;
         this.name = name;
         this.passwordHash = passwordHash;
     }
@@ -36,5 +37,10 @@ public class User {
 
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
+    }
+
+    @Override
+    public String toString() {
+        return id + " " + name + " ";
     }
 }
