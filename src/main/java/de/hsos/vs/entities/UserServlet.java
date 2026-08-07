@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 @WebServlet("/api/users/*")
 public class UserServlet extends HttpServlet {
-
+    //UserDao userDao = new UserDao();
     LobbyService service = new LobbyService();
     ArrayList<User> users = service.getUsers();
 

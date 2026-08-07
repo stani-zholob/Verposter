@@ -52,6 +52,17 @@ public class RoomServlet extends HttpServlet {
         resp.getWriter().write(gson.toJson(foundRoom));
     }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Gson gson = new Gson();
+
+        resp.setContentType("application/json");
+        Room roomFromJson = gson.fromJson(req.getReader(), Room.class);
+        Room newRoom = new Room(rooms.size() + 1, roomFromJson.getName());
+        rooms.add(newRoom);
+        resp.setStatus(HttpServletResponse.SC_OK);
+    }
+
     private int getRoomIndex(HttpServletRequest request){
         String pathLine = request.getPathInfo(); // da liegt jetzt /42
         if (pathLine == null || pathLine.equals("/")) return -1; //  falls /api/users oder /api/users/

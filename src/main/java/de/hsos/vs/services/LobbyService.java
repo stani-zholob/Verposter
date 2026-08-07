@@ -8,6 +8,8 @@ import java.util.ArrayList;
  * @author Stanislav
  */
 public class LobbyService {
+    //UserDAO userDao = new UserDAO();
+    //ArrayList<User> users = userDao.finAllUsers();
     ArrayList<User> users = new ArrayList<>();
     ArrayList<Room> rooms = new ArrayList<>();
 

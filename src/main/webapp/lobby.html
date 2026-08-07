@@ -1,3 +1,5 @@
+<!-- Author: Stanislav -->
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -8,9 +10,10 @@
 
 <h1>VERPOSTER</h1>
 
-<h2>Lobbies</h2>
+<h2>RoomList</h2>
 
-<p><button type="button">+ New Lobby</button></p>
+<form action = "/Verposter/createroom" method = "get">
+    <p><button type="submit">+ New Lobby</button></p></form>
 
 
 
@@ -47,6 +50,10 @@
         }
     }
     getRooms();
+
+    async function getUsername(){
+
+    }
 </script>
 
 </body>

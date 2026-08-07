@@ -23,6 +23,7 @@ public class RegsiterServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         //List<User> users = userService.findAllUsers();
         //req.setAttribute("users", users);
         req.getRequestDispatcher("/registration.html").forward(req, resp);
