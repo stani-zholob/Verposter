@@ -1,5 +1,6 @@
 package de.hsos.vs.web.servlet;
 
+import de.hsos.vs.entities.UserServlet;
 import de.hsos.vs.web.entities.User;
 import de.hsos.vs.wordservice.UserServiceImpl;
 //import de.hsos.vs.wordservice.db.UserDAO;
@@ -11,10 +12,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/register")
 public class RegsiterServlet extends HttpServlet {
+
 
     //UserDAO userDAO = new UserDAO();
 
@@ -29,6 +32,10 @@ public class RegsiterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
+
+        User user  = new User(1,username,password);
+
+
         //User user = new User(username, password);
         //userDAO.insert(user);
 

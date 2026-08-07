@@ -47,16 +47,13 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
-        System.out.println("username = " + username);
-        System.out.println("password = " + password);
 
         Gson gson = new Gson();
-        resp.setContentType("application/json");
+        User userFromJson = gson.fromJson(req.getReader(), User.class);
 
-
-        User user = new User();
+        User newUser = new User(users.size() + 1, userFromJson.getName(), userFromJson.getPasswordHash());
+        users.add(newUser);
+        resp.setStatus(HttpServletResponse.SC_OK);
 
 //        PrintWriter out = resp.getWriter();
 //        out.write(gson.toJson(users));

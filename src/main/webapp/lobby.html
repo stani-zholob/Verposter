@@ -18,7 +18,9 @@
     <thead>
         <tr>
             <th>Raum</th>
+            <th>Name</th>
             <th>Spieler</th>
+
         </tr>
     </thead>
 
@@ -39,6 +41,7 @@
             const row = document.createElement("tr");
             row.innerHTML = `
                 <td>${room.id}</td>
+                <td>${room.name}</td>
                 <td> <button type="button"> Beitreten </button> </td>`;
             table.append(row);
         }

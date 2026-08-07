@@ -11,12 +11,14 @@ import java.util.List;
  */
 public class Room {
     private int id;
+    private String name;
     private List<User> users;
 
 
 
-    public Room(int id) {
+    public Room(int id, String name) {
         this.id = id;
+        this.name = name;
         this.users = new ArrayList<>();
     }
 
@@ -28,8 +30,13 @@ public class Room {
         this.users.remove(user);
     }
 
+
     public int getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setId(int id) {

@@ -3,6 +3,7 @@ package de.hsos.vs.entities;
 
 import com.google.gson.Gson;
 import de.hsos.vs.web.entities.Room;
+import de.hsos.vs.web.entities.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -19,9 +20,9 @@ public class RoomServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        rooms.add(new Room(0));
-        rooms.add(new Room(1));
-        rooms.add(new Room(2));
+        rooms.add(new Room(0,"VS gang"));
+        rooms.add(new Room(1,"loosers kommt vorbei"));
+        rooms.add(new Room(2,"Keine Name"));
     }
 
     @Override

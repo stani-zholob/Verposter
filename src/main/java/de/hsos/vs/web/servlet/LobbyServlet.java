@@ -19,13 +19,9 @@ import java.util.ArrayList;
 @WebServlet("/lobby")
 public class LobbyServlet extends HttpServlet {
 
-    ArrayList<Room> rooms = new ArrayList<>();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        PrintWriter out = resp.getWriter();
-        out.write(rooms.toString());
         getServletContext().getRequestDispatcher("/lobby.html").forward(req, resp);
     }
 
