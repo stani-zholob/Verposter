@@ -13,19 +13,51 @@
 <h2>Sign In</h2>
 
 <p>
-    <form action = "/Verposter/login" method = "post">
+    <form id="login-form" action = "/Verposter/login" method = "post">
 
     <label for="username">Your Username</label><br>
     <input type="text" id="username" name="username" maxlength="20"required>
 
     <label for="password"></label><br>
-    <input type="text" id="password" name="password" maxlength="20" required>
+    <input type="password" id="password" name="password" maxlength="20" required>
 
 </p>
 
 <button> Login </button>
 </form>
 
+
+
+<script>
+    const form = document.getElementById("login-form");
+
+    form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        const resp = await fetch("/Verposter/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: "same-origin",
+            body: JSON.stringify({
+                name: username,
+                passwordHash: password
+            })
+        });
+
+        if (resp.ok) {
+            window.location.href = "/Verposter/lobby";
+        } else if (resp.status === 401) {
+            alert("Wrong username or password");
+        } else {
+            alert("Server error");
+        }
+    });
+</script>
 
 
 <form action = "/Verposter/register" method = "get">

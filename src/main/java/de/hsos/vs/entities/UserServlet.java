@@ -9,6 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -31,16 +32,20 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
+        /**
+         * die Daten werden wie ein JSON packet geschickt, Authentication teil ist bei ServletFilter
+         * Stanislav
+         */
         resp.setContentType("application/json");
         Gson gson = new Gson();
 
+        //falls Verposter/users/ endpoint ist
         int userId = getUserIndex(req);
         if  (userId == -1) {
             resp.getWriter().write((gson.toJson(users) + "\n"));
             return;
         }
-
+        //falls Verposter/users/5 bestimmter endpoint ist
         User foundUser = null;
         for (User user : users) {
             if (user.getId() == userId) {

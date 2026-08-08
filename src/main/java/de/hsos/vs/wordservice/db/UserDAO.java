@@ -22,11 +22,15 @@ public class UserDAO {
             pstmt.setString(2, passwordHash);
             pstmt.executeUpdate();
 
-            try (ResultSet keys = pstmt.getGeneratedKeys()) {
-                keys.next();
-                return new User(keys.getInt(1), name, passwordHash);
+            try (Statement stmt = conn.createStatement();
+                 ResultSet rs = stmt.executeQuery("SELECT last_insert_rowid()")) {
+
+                if (rs.next()) {
+                    return new User(rs.getInt(1), name, passwordHash);
+                }
             }
         }
+        throw new SQLException("Could not retrieve generated user ID");
     }
     /* Fuer den Login: Benutzer per Name suchen. */
     public Optional<User> findByName(String name) throws SQLException {

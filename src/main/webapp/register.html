@@ -13,7 +13,7 @@
 <h2>Registration</h2>
 
 <p>
-<form action = "/Verposter/register" method = "post">
+<form id="reg-form" action = "/Verposter/register" method = "post">
 
     <label for="username">Your Username</label><br>
     <input type="text" id="username" name="username" maxlength="20"><br>
@@ -23,8 +23,43 @@
 
 </p>
 <button>Sign Up</button>
-
 </form>
+
+
+
+    <script>
+        const form = document.getElementById("reg-form");
+
+        form.addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            const response = await fetch("/Verposter/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: "same-origin",
+                body: JSON.stringify({
+                    name: username,
+                    passwordHash: password
+                })
+            });
+
+            if (response.ok) {
+                window.location.href = "/Verposter/login"
+            } else if (response.status === 409) {
+                alert("Username already exists");
+            } else if (response.status === 401) {
+                alert("Wrong username or password");
+            } else {
+                alert("Server error");
+            }
+        });
+
+    </script>
 
 </body>
 </html>

@@ -10,6 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -54,13 +55,38 @@ public class RoomServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Gson gson = new Gson();
+        String[] pathParts = getPathParts(req);
 
-        resp.setContentType("application/json");
-        Room roomFromJson = gson.fromJson(req.getReader(), Room.class);
-        Room newRoom = new Room(rooms.size() + 1, roomFromJson.getName());
-        rooms.add(newRoom);
-        resp.setStatus(HttpServletResponse.SC_OK);
+        //POST /api/rooms/*
+
+        //POST /api/rooms/       JSON:{"name": name}if (g)
+        if (pathParts.length == 0) {
+            Gson gson = new Gson();
+            resp.setContentType("application/json");
+            Room roomFromJson = gson.fromJson(req.getReader(), Room.class);
+            Room newRoom = new Room(rooms.size() + 1, roomFromJson.getName());
+            rooms.add(newRoom);
+            resp.setStatus(HttpServletResponse.SC_OK);
+        }
+
+        // POST /api/rooms/1/members
+        if (pathParts.length == 2 && pathParts[1].equals("members")) {
+            int roomId = Integer.parseInt(pathParts[0]);
+            HttpSession session = req.getSession(false);
+            int userId = (Integer) session.getAttribute("userId");
+
+
+            //TESTS
+            System.out.println(roomId + " " + userId);
+
+            Room room = service.joinRoom(roomId, userId);
+            resp.setStatus(HttpServletResponse.SC_OK);
+            resp.setContentType("application/json");
+            resp.getWriter().write(new Gson().toJson(room));
+
+            return;
+        }
+        resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
     }
 
     private int getRoomIndex(HttpServletRequest request){
@@ -74,5 +100,17 @@ public class RoomServlet extends HttpServlet {
             e.printStackTrace();
             return -1;
         }
+    }
+
+    /**
+     * Stanislav
+     * req.getPathInfo() gibt /1/members fuer /api/rooms/1/members
+     */
+    private String[] getPathParts(HttpServletRequest req){
+        String pathLine = req.getPathInfo();
+        if (pathLine == null || pathLine.equals("/")) return new String[0];
+
+        // "/1/members" wird ["1", "members"]
+        return pathLine.substring(1).split("/");
     }
 }

@@ -38,7 +38,14 @@ public class RegsiterServlet extends HttpServlet {
         User newUser  = new User(0,userFromJson.getName(), userFromJson.getPasswordHash());
 
         try {
+            if(userDAO.findByName(newUser.getName()).isPresent()){
+                resp.setStatus(HttpServletResponse.SC_CONFLICT);
+                resp.getWriter().println("Username already exists");
+                return;
+            }
             userDAO.insert(newUser.getName(), newUser.getPasswordHash());
+            resp.setStatus(HttpServletResponse.SC_CREATED);
+            resp.getWriter().println("Successfully registered");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

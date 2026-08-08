@@ -17,6 +17,13 @@ public class Database {
 
     private Database() {
     }
+    static {
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("SQLite JDBC driver not found", e);
+        }
+    }
 
     public static Connection connect() throws SQLException {
         Connection conn = DriverManager.getConnection("jdbc:sqlite:" + DB_PATH);
