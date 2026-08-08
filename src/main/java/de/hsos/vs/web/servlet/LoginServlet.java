@@ -26,7 +26,12 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/login.html").forward(req, resp);
+        HttpSession session = req.getSession(false);
+        if (session != null && session.getAttribute("username") != null) {
+            resp.sendRedirect(req.getContextPath() + "/lobby");
+        } else{
+            req.getRequestDispatcher("/login.html").forward(req, resp);
+        }
     }
 
     @Override
@@ -43,7 +48,8 @@ public class LoginServlet extends HttpServlet {
         if ("chef".equals(username) && "123".equals(password)) {
             HttpSession session = req.getSession();
             session.setAttribute("username", username);
-            req.getRequestDispatcher("/lobby").forward(req, resp);
+            resp.sendRedirect(req.getContextPath() + "/lobby");
+
         }
         else {
             PrintWriter out = resp.getWriter();

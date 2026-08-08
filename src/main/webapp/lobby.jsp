@@ -1,5 +1,4 @@
 <!-- Author: Stanislav -->
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -10,19 +9,18 @@
 
 <h1>VERPOSTER</h1>
 
-<h2>RoomList</h2>
+<h2>Hello</h2>
+<h2>Room List</h2>
 
 <form action = "/Verposter/createroom" method = "get">
     <p><button type="submit">+ New Lobby</button></p></form>
-
-
 
 <table border="1" cellpadding="5">
     <thead>
         <tr>
             <th>Room</th>
             <th>Name</th>
-            <th>Players</th>
+            <th></th>
 
         </tr>
     </thead>
@@ -31,7 +29,9 @@
 
     </tbody>
 </table>
-
+<form action="/Verposter/logout" method="get">
+<br> <button>Log Out</button>
+</form>
 <script>
     async function getRooms(){
         const resp = await fetch('/Verposter/api/rooms');
@@ -45,7 +45,7 @@
             row.innerHTML = `
                 <td>${room.id}</td>
                 <td>${room.name}</td>
-                <td> <form action = "/gamestart.html" method = "get"> <button type="button" name = "join"> Join </button> </form> </td>`;
+                <td> <form action="/gamestart.html" method="get"> <button type="button" name = "join"> Join </button> </form> </td> `;
             table.append(row);
         }
     }

@@ -1,9 +1,11 @@
 package de.hsos.vs.web.servlet;
 
+import com.google.gson.Gson;
 import de.hsos.vs.entities.UserServlet;
 import de.hsos.vs.web.entities.User;
 import de.hsos.vs.wordservice.UserServiceImpl;
 //import de.hsos.vs.wordservice.db.UserDAO;
+import de.hsos.vs.wordservice.db.UserDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,26 +22,26 @@ import java.util.List;
 public class RegsiterServlet extends HttpServlet {
 
 
-    //UserDAO userDAO = new UserDAO();
+    UserDAO userDAO = new UserDAO();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        //List<User> users = userService.findAllUsers();
-        //req.setAttribute("users", users);
-        req.getRequestDispatcher("/registration.html").forward(req, resp);
+        req.getRequestDispatcher("/register.html").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
+        Gson gson = new Gson();
+        User userFromJson = gson.fromJson(req.getReader(), User.class);
 
-        User user  = new User(1,username,password);
+        //hier hashen
+        User newUser  = new User(0,userFromJson.getName(), userFromJson.getPasswordHash());
 
-
-        //User user = new User(username, password);
-        //userDAO.insert(user);
+        try {
+            userDAO.insert(newUser.getName(), newUser.getPasswordHash());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         resp.sendRedirect("/login");
     }
