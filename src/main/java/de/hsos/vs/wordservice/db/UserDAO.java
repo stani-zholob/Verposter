@@ -33,7 +33,7 @@ public class UserDAO {
         }
         throw new SQLException("Could not retrieve generated user ID");
     }
-    /* Fuer den Login: Benutzer per Name suchen. */
+    /** Fuer den Login: Benutzer per Name suchen. */
     public Optional<User> findByName(String name) throws SQLException {
         String sql = "SELECT id, name, password FROM users WHERE name = ?";
 
@@ -64,10 +64,9 @@ public class UserDAO {
                 return Optional.empty();
             }
         }
-    }
-    /*public ArrayList<User> findAll() throws SQLException {
+    //public ArrayList<User> findAll() throws SQLException {
 
-    }*/
+    }
 
     private User map(ResultSet rs) throws SQLException {
         return new User(rs.getInt("id"), rs.getString("name"), rs.getString("password"));

@@ -6,9 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * Zentraler Zugriff auf die SQLite-Datenbank.
- * Der Pfad laesst sich ueber -Dverposter.db=/pfad/zur/datei.db ueberschreiben,
- * weil das Arbeitsverzeichnis unter Tomcat nicht die Projektwurzel ist.
+ * Zentraler Zugriff auf die SQLite-Datenbank
  */
 public class Database {
 
@@ -25,16 +23,21 @@ public class Database {
         }
     }
 
+    /**
+     * erstellt die Verbindung
+     */
     public static Connection connect() throws SQLException {
         Connection conn = DriverManager.getConnection("jdbc:sqlite:" + DB_PATH);
-        // SQLite prueft Fremdschluessel nur, wenn es pro Verbindung eingeschaltet wird
+        // SQLite prüft Fremdschlüssel nur, wenn es pro Verbindung eingeschaltet wird
         try (Statement stmt = conn.createStatement()) {
             stmt.execute("PRAGMA foreign_keys = ON");
         }
         return conn;
     }
 
-    /** Legt die Tabellen an, falls sie noch nicht existieren. */
+    /**
+     * Legt die Tabellen an, falls sie noch nicht existieren.
+     */
     public static void init() throws SQLException {
         try (Connection conn = connect(); Statement stmt = conn.createStatement()) {
             stmt.execute("""

@@ -3,7 +3,6 @@ package de.hsos.vs.web.entities;
 public class User {
     private int id;
     private String name;
-    /** Wird in der Spalte "password" abgelegt - dort gehoert ein Hash hinein, kein Klartext. */
     private String passwordHash;
 
     public User() {

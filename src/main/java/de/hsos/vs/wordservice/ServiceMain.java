@@ -35,7 +35,7 @@ public class ServiceMain {
             Topic berufe = topicDAO.insert("Berufe");
             wordDAO.insert(berufe.getId(), "Baecker", "steht frueh auf");
 
-            userDAO.insert("testuser", "nochNichtGehasht");
+            userDAO.insert("testuser", "testpasswort");
             System.out.println("Beispieldaten eingefuegt.");
         }
 
@@ -43,7 +43,7 @@ public class ServiceMain {
             List<Word> words = wordDAO.findByTopic(topic.getId());
             System.out.println(topic.getName() + " (" + words.size() + " Woerter)");
             for (Word word : words) {
-                System.out.println("  " + word.getName() + " - " + word.getTip());
+                System.out.println("  " + word.getWord() + " - " + word.getTip());
             }
         }
     }

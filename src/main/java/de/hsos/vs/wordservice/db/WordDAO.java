@@ -52,7 +52,7 @@ public class WordDAO {
         return words;
     }
 
-    /** Zieht ein zufaelliges Wort - das braucht das Spiel beim Rundenstart. */
+    /** Zieht ein zufaelliges Wort, das braucht das Spiel beim Rundenstart. */
     public Optional<Word> findRandomByTopic(int topicId) throws SQLException {
         String sql = "SELECT id, topicId, word, tip FROM words WHERE topicId = ? "
                 + "ORDER BY RANDOM() LIMIT 1";
