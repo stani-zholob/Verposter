@@ -28,6 +28,7 @@ public class ServiceMain {
         UserDAO userDAO = new UserDAO();
 
         if (topicDAO.findAll().isEmpty()) {
+            //Topics mit Wörterpaaren
             Topic clashRoyale = topicDAO.insert("Clash Royale");
             wordDAO.insert(clashRoyale.getId(), "Prinzessin", "Karte hat weite Entfernung");
             wordDAO.insert(clashRoyale.getId(), "Bowler", "Rollt etwas");
@@ -35,17 +36,10 @@ public class ServiceMain {
             wordDAO.insert(clashRoyale.getId(), "Tornado", "Bekannt für King Tower Activation");
             wordDAO.insert(clashRoyale.getId(), "Mega Ritter", "Bekannt für No Skill");
 
-
+            //Erste Anmeldedaten
             userDAO.insert("admin", "admin");
-            System.out.println("Beispieldaten eingefuegt.");
-        }
 
-        for (Topic topic : topicDAO.findAll()) {
-            List<Word> words = wordDAO.findByTopic(topic.getId());
-            System.out.println(topic.getName() + " (" + words.size() + " Woerter)");
-            for (Word word : words) {
-                System.out.println("  " + word.getWord() + " - " + word.getTip());
-            }
+            System.out.println("Beispieldaten wurden eingefuegt.");
         }
     }
 }
