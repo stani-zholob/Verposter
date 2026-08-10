@@ -13,21 +13,21 @@ import java.util.Optional;
 public class UserDAO {
 
     /** Legt einen Benutzer an und gibt ihn mit der vergebenen id zurueck. */
-    public User insert(String name, String passwordHash) throws SQLException {
+    public User insert(String name, String password) throws SQLException {
         String sql = "INSERT INTO users(name, password) VALUES(?, ?)";
 
         try (Connection conn = Database.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             pstmt.setString(1, name);
-            pstmt.setString(2, passwordHash);
+            pstmt.setString(2, password);
             pstmt.executeUpdate();
 
             try (Statement stmt = conn.createStatement();
                  ResultSet rs = stmt.executeQuery("SELECT last_insert_rowid()")) {
 
                 if (rs.next()) {
-                    return new User(rs.getInt(1), name, passwordHash);
+                    return new User(rs.getInt(1), name, password);
                 }
             }
         }

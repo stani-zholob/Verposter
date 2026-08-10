@@ -45,7 +45,7 @@
             row.innerHTML = `
                 <td>${room.id}</td>
                 <td>${room.name}</td>
-                <td> <form action="/gamestart.html" method="get"> <button type="button" name = "join"> Join </button> </form> </td> `;
+                <td> <form action="/api/rooms/*" method="post"> <button type="submit"> Join </button> </form> </td> `;
             table.append(row);
         }
     }

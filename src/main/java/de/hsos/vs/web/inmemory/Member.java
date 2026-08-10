@@ -3,13 +3,11 @@ package de.hsos.vs.web.inmemory;
 public class Member {
     private int id;
     private String name;
-    private String role;
     private boolean ready;
 
-    public Member(int id, String name, String role) {
+    public Member(int id, String name) {
         this.id = id;
         this.name = name;
-        this.role = role;
         this.ready = false;
     }
     public int getId() {
@@ -23,12 +21,6 @@ public class Member {
     }
     public void setName(String name) {
         this.name = name;
-    }
-    public String getRole() {
-        return role;
-    }
-    public void setRole(String role) {
-        this.role = role;
     }
     public boolean isReady() {
         return ready;

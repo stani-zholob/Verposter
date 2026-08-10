@@ -6,9 +6,11 @@ public class Topic {
     int id;
     String name;
     ArrayList<Word> words;
+
     public Topic(int id, String name) {
         this.id = id;
         this.name = name;
+        this.words = new ArrayList<>();
     }
 
     public int getId() {
@@ -21,5 +23,9 @@ public class Topic {
 
     public ArrayList<Word> getWords() {
         return words;
+    }
+
+    public void addWord(Word word) {
+        words.add(word);
     }
 }

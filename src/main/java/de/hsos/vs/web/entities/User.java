@@ -8,10 +8,10 @@ public class User {
     public User() {
     }
 
-    public User(int id, String name, String passwordHash) {
+    public User(int id, String name, String password) {
         this.id = id;
         this.name = name;
-        this.password = passwordHash;
+        this.password = password;
     }
 
     public int getId() {

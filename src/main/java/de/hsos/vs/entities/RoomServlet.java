@@ -62,8 +62,9 @@ public class RoomServlet extends HttpServlet {
             HttpSession session = req.getSession(false);
             Integer userId = (Integer) session.getAttribute("userId");
 
-            if (userId == null) {
+            if (session == null || userId == null) {
                 resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+                return;
             }
 
             //TESTS
@@ -94,7 +95,8 @@ public class RoomServlet extends HttpServlet {
             Room roomFromJson = gson.fromJson(req.getReader(), Room.class);
             Room newRoom = new Room(rooms.size() + 1, roomFromJson.getName());
             rooms.add(newRoom);
-            resp.setStatus(HttpServletResponse.SC_OK);
+            resp.setStatus(HttpServletResponse.SC_CREATED);
+            resp.setHeader("Location", req.getContextPath() + "/api/rooms/" + newRoom.getId());
         }
 
         // POST /api/rooms/1/members
@@ -102,10 +104,13 @@ public class RoomServlet extends HttpServlet {
             int roomId = Integer.parseInt(pathParts[0]);
             HttpSession session = req.getSession(false);
             Integer userId = (Integer) session.getAttribute("userId");
+            String username = (String) session.getAttribute("username");
 
             if (userId == null) {
                 resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
             }
+            Member member = new Member(userId,username);
+            rooms.get(roomId).addMember(member);
 
             //TESTS
             System.out.println(roomId + " " + userId);
@@ -117,7 +122,6 @@ public class RoomServlet extends HttpServlet {
 
             return;
         }
-        resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
     }
 
     private int getRoomIndex(HttpServletRequest request){
