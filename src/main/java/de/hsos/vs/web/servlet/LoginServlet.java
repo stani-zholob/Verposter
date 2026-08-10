@@ -11,10 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Objects;
 
 /**
  * @author Stanislav
@@ -46,17 +43,17 @@ public class LoginServlet extends HttpServlet {
         User userFromJson = gson.fromJson(req.getReader(), User.class);
 
 
-        User newUser  = new User(0,userFromJson.getName(), userFromJson.getPasswordHash());
+        User newUser  = new User(0,userFromJson.getName(), userFromJson.getPassword());
 
 
         //wir pruefen ob die Daten Nullen sind
-        if (newUser.getName() == null || newUser.getPasswordHash() == null) {
+        if (newUser.getName() == null || newUser.getPassword() == null) {
             resp.sendRedirect(req.getContextPath() + "/login.html");
         }
 
         //test ausgabe
         System.out.println("username = " + newUser.getName());
-        System.out.println("password = " + newUser.getPasswordHash());
+        System.out.println("password = " + newUser.getPassword());
 
         try {
             // in einer Datenbank suchen also ein Objekt aus einer Datebank
@@ -64,7 +61,7 @@ public class LoginServlet extends HttpServlet {
 
 
             //falls es nicht in der Tabelle oder den Passwort nicht stimmt, dann redirect zurück
-            if (user == null || !newUser.getPasswordHash().equals(user.getPasswordHash())) {
+            if (user == null || !newUser.getPassword().equals(user.getPassword())) {
                 resp.sendRedirect(req.getContextPath() + "/login.html");
             }
 

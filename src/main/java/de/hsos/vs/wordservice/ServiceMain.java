@@ -28,14 +28,15 @@ public class ServiceMain {
         UserDAO userDAO = new UserDAO();
 
         if (topicDAO.findAll().isEmpty()) {
-            Topic tiere = topicDAO.insert("Tiere");
-            wordDAO.insert(tiere.getId(), "Elefant", "grosses graues Tier");
-            wordDAO.insert(tiere.getId(), "Pinguin", "kann nicht fliegen");
+            Topic clashRoyale = topicDAO.insert("Clash Royale");
+            wordDAO.insert(clashRoyale.getId(), "Prinzessin", "Karte hat weite Entfernung");
+            wordDAO.insert(clashRoyale.getId(), "Bowler", "Rollt etwas");
+            wordDAO.insert(clashRoyale.getId(), "Barbar", "Klassische Clash Universe Figur");
+            wordDAO.insert(clashRoyale.getId(), "Tornado", "Bekannt für King Tower Activation");
+            wordDAO.insert(clashRoyale.getId(), "Mega Ritter", "Bekannt für No Skill");
 
-            Topic berufe = topicDAO.insert("Berufe");
-            wordDAO.insert(berufe.getId(), "Baecker", "steht frueh auf");
 
-            userDAO.insert("testuser", "testpasswort");
+            userDAO.insert("admin", "admin");
             System.out.println("Beispieldaten eingefuegt.");
         }
 

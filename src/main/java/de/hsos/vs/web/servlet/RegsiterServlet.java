@@ -3,10 +3,8 @@ package de.hsos.vs.web.servlet;
 import com.google.gson.Gson;
 //import de.hsos.vs.entities.UserServlet;
 import de.hsos.vs.web.entities.User;
-import de.hsos.vs.wordservice.UserServiceImpl;
 //import de.hsos.vs.wordservice.db.UserDAO;
 import de.hsos.vs.wordservice.db.UserDAO;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,8 +13,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 @WebServlet("/register")
 public class RegsiterServlet extends HttpServlet {
@@ -35,7 +31,7 @@ public class RegsiterServlet extends HttpServlet {
         User userFromJson = gson.fromJson(req.getReader(), User.class);
 
         //hier hashen
-        User newUser  = new User(0,userFromJson.getName(), userFromJson.getPasswordHash());
+        User newUser  = new User(0,userFromJson.getName(), userFromJson.getPassword());
 
         try {
             if(userDAO.findByName(newUser.getName()).isPresent()){
@@ -43,7 +39,7 @@ public class RegsiterServlet extends HttpServlet {
                 resp.getWriter().println("Username already exists");
                 return;
             }
-            userDAO.insert(newUser.getName(), newUser.getPasswordHash());
+            userDAO.insert(newUser.getName(), newUser.getPassword());
             resp.setStatus(HttpServletResponse.SC_CREATED);
             resp.getWriter().println("Successfully registered");
         } catch (SQLException e) {

@@ -3,7 +3,7 @@ package de.hsos.vs.web.entities;
 public class User {
     private int id;
     private String name;
-    private String passwordHash;
+    private String password;
 
     public User() {
     }
@@ -11,7 +11,7 @@ public class User {
     public User(int id, String name, String passwordHash) {
         this.id = id;
         this.name = name;
-        this.passwordHash = passwordHash;
+        this.password = passwordHash;
     }
 
     public int getId() {
@@ -30,12 +30,12 @@ public class User {
         this.name = name;
     }
 
-    public String getPasswordHash() {
-        return passwordHash;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
