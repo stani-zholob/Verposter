@@ -3,7 +3,8 @@ package de.hsos.vs.entities;
 
 import com.google.gson.Gson;
 import de.hsos.vs.services.LobbyService;
-import de.hsos.vs.web.entities.Room;
+import de.hsos.vs.web.inmemory.Member;
+import de.hsos.vs.web.inmemory.Room;
 import de.hsos.vs.web.entities.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,8 +14,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Stanislav
@@ -33,6 +34,10 @@ public class RoomServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String[] pathParts = getPathParts(req);
+
+
+        if (pathParts.length == 0) {
 
         resp.setContentType("application/json");
         Gson gson = new Gson();
@@ -51,6 +56,29 @@ public class RoomServlet extends HttpServlet {
             }
         }
         resp.getWriter().write(gson.toJson(foundRoom));
+        }
+        if (pathParts.length == 2 && pathParts[1].equals("members")) {
+            int roomId = Integer.parseInt(pathParts[0]);
+            HttpSession session = req.getSession(false);
+            Integer userId = (Integer) session.getAttribute("userId");
+
+            if (userId == null) {
+                resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+            }
+
+            //TESTS
+            System.out.println(roomId + " " + userId);
+            ArrayList<Room> rooms = service.getRooms();
+            Room currentRoom = rooms.get(roomId);
+
+            List<Member> members = currentRoom.getMembers();
+
+            resp.setStatus(HttpServletResponse.SC_OK);
+            resp.setContentType("application/json");
+            resp.getWriter().write(new Gson().toJson(members));
+
+            return;
+        }
     }
 
     @Override
@@ -73,8 +101,11 @@ public class RoomServlet extends HttpServlet {
         if (pathParts.length == 2 && pathParts[1].equals("members")) {
             int roomId = Integer.parseInt(pathParts[0]);
             HttpSession session = req.getSession(false);
-            int userId = (Integer) session.getAttribute("userId");
+            Integer userId = (Integer) session.getAttribute("userId");
 
+            if (userId == null) {
+                resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+            }
 
             //TESTS
             System.out.println(roomId + " " + userId);

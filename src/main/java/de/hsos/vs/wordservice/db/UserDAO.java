@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Optional;
 
 public class UserDAO {
@@ -64,6 +65,9 @@ public class UserDAO {
             }
         }
     }
+    /*public ArrayList<User> findAll() throws SQLException {
+
+    }*/
 
     private User map(ResultSet rs) throws SQLException {
         return new User(rs.getInt("id"), rs.getString("name"), rs.getString("password"));

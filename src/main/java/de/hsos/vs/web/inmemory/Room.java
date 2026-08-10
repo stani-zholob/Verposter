@@ -1,6 +1,4 @@
-package de.hsos.vs.web.entities;
-
-import jakarta.servlet.annotation.WebServlet;
+package de.hsos.vs.web.inmemory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,22 +10,22 @@ import java.util.List;
 public class Room {
     private int id;
     private String name;
-    private List<User> users;
+    private List<Member> members;
 
 
 
     public Room(int id, String name) {
         this.id = id;
         this.name = name;
-        this.users = new ArrayList<>();
+        this.members = new ArrayList<>();
     }
 
-    public void addUser(User user) {
-        this.users.add(user);
+    public void addMember(Member member) {
+        this.members.add(member);
     }
 
-    public void removeUser(User user) {
-        this.users.remove(user);
+    public void removeMember(Member member) {
+        this.members.remove(member);
     }
 
 
@@ -43,11 +41,11 @@ public class Room {
         this.id = id;
     }
 
-    public List<User> getUser() {
-        return users;
+    public List<Member> getMembers() {
+        return members;
     }
 
-    public void setUser(List<User> user) {
-        this.users = user;
+    public void setUser(List<Member> members) {
+        this.members = members;
     }
 }
