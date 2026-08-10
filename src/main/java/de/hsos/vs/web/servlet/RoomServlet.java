@@ -61,7 +61,7 @@ public class RoomServlet extends HttpServlet {
             Gson gson = new Gson();
 
             int roomId = getRoomIndex(req);
-            Room currentRoom = rooms.get(roomId);
+            Room currentRoom = lobby.getRoomById(roomId);
             resp.getWriter().write(gson.toJson(currentRoom));
             System.out.println(currentRoom);
         }
@@ -71,16 +71,16 @@ public class RoomServlet extends HttpServlet {
             int roomId = Integer.parseInt(pathParts[0]);
             HttpSession session = req.getSession(false);
 
-            Integer userId = (Integer) session.getAttribute("userId");
-            String username = (String) session.getAttribute("username");
-            Boolean ready = (Boolean) session.getAttribute("ready");
-            if (userId == null || username == null || ready == null) {
+            if (session == null || session.getAttribute("userId") == null) {
                 resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                 return;
             }
 
-            ArrayList<Room> rooms = lobby.getRooms();
-            Room currentRoom = rooms.get(roomId);
+            Room currentRoom = lobby.getRoomById(roomId);
+            if (currentRoom == null) {
+                resp.sendError(HttpServletResponse.SC_NOT_FOUND);
+                return;
+            }
             List<Member> members = currentRoom.getMembers();
 
             resp.setContentType("application/json");
@@ -115,32 +115,59 @@ public class RoomServlet extends HttpServlet {
         if (pathParts.length == 2 && pathParts[1].equals("members")) {
             int roomId = Integer.parseInt(pathParts[0]);
             HttpSession session = req.getSession(false);
-            Integer userId = (Integer) session.getAttribute("userId");
+
+            if (session == null || session.getAttribute("userId") == null) {
+                resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+                return;
+            }
+            int userId = (Integer) session.getAttribute("userId");
             String username = (String) session.getAttribute("username");
 
-            if (userId == null) {
-                resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-            }
-
             Room room = lobby.getRoomById(roomId);
-            Member member = new Member(userId,username);
 
             for (Member m : room.getMembers()) {
                 if (m.getId() == userId) {
                     System.out.println("Benutzer ist bereits im Raum");
-                    resp.sendRedirect("/Verposter/gamestart");
+                    resp.sendRedirect("/Verposter/gamestart?roomId=" + roomId);
                     return;
                 }
             }
 
-            rooms.get(roomId).addMember(member);
+            room.addMember(new Member(userId, username));
 
             System.out.println(roomId + " " + userId);
 
+            resp.sendRedirect("/Verposter/gamestart?roomId=" + roomId);
+        }
+    }
+
+    @Override
+    protected void doPatch(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String[] pathParts = getPathParts(req);
+
+        // PATCH /api/rooms/1/members/ready
+        if (pathParts.length == 3 && pathParts[1].equals("members") && pathParts[2].equals("ready")) {
+            int roomId = Integer.parseInt(pathParts[0]);
+
+            HttpSession session = req.getSession(false);
+            int userId = (Integer) session.getAttribute("userId");
+
+            Room room = lobby.getRoomById(roomId);
+            Member member = null;
+            for (Member m : room.getMembers()) {
+                if (m.getId() == userId) {
+                    member = m;
+                    break;
+                }
+            }
+
+            member.setReady(!member.isReady());
+
+            session.setAttribute("ready", member.isReady());
+
             resp.setStatus(HttpServletResponse.SC_OK);
             resp.setContentType("application/json");
-            resp.getWriter().write(new Gson().toJson(room));
-            resp.sendRedirect("/Verposter/gamestart");
+            resp.getWriter().write(new Gson().toJson(room.getMembers()));
         }
     }
 

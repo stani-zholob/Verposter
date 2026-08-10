@@ -39,13 +39,12 @@
 
         const table = document.getElementById("rooms-table");
         for(const room of rooms){
-            const n = room.id - 1;
             const row = document.createElement("tr");
             row.innerHTML = `
                 <td>${room.id}</td>
                 <td>${room.name}</td>
                 <td>
-                        <form action="/Verposter/api/rooms/${n}/members" method="post">
+                        <form action="/Verposter/api/rooms/${room.id}/members" method="post">
                             <button type="submit"> Beitreten </button>
                     </form>
                 </td> `;

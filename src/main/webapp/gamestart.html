@@ -29,13 +29,19 @@
     </tbody>
 </table>
 
+<form action="/showcard.html"></form>
+<p><button type="button" id="ready-button">Bereit</button>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button">Verlassen</button></p>
+
 <script>
+    const ROOM_ID = new URLSearchParams(window.location.search).get("roomId");
+
     async function getMembers(){
-        const resp = await fetch('/Verposter/api/rooms/0/members');
+        const resp = await fetch(`/Verposter/api/rooms/${ROOM_ID}/members`);
         const members = await resp.json();
         console.log(members);
 
         const table = document.getElementById("users-table");
+        table.innerHTML = "";
         for(const member of members){
             const row = document.createElement("tr");
             row.innerHTML = `
@@ -45,12 +51,20 @@
             table.append(row);
         }
     }
+
+    document.getElementById("ready-button").addEventListener("click", async function () {
+        const resp = await fetch(`/Verposter/api/rooms/${ROOM_ID}/members/ready`, {
+            method: "PATCH"
+        });
+        if (!resp.ok) {
+            alert("Status konnte nicht geändert werden");
+            return;
+        }
+        await getMembers();
+    });
+
     getMembers();
+    setInterval(getMembers, 2000);
 </script>
-
-<form action="/showcard.html"></form>
-<p><button type="button">Bereit</button>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button">Verlassen</button></p>
-
-
 </body>
 </html>

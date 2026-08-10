@@ -12,8 +12,6 @@ public class Room {
     private String name;
     private List<Member> members;
 
-
-
     public Room(int id, String name) {
         this.id = id;
         this.name = name;
@@ -27,7 +25,6 @@ public class Room {
     public void removeMember(Member member) {
         this.members.remove(member);
     }
-
 
     public int getId() {
         return id;
