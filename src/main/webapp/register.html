@@ -4,28 +4,30 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Verposter - Sign Up</title>
+    <title>Verposter - Registrieren</title>
 </head>
-<body>
+<body style="text-align: center;">
 
 <h1>VERPOSTER</h1>
 
-<h2>Registration</h2>
+<h2>Registrieren</h2>
 
 <p>
 <form id="reg-form" action = "/Verposter/register" method = "post">
 
-    <label for="username">Your Username</label><br>
+    <label for="username">Benutzername</label><br>
     <input type="text" id="username" name="username" maxlength="20"><br>
 
-    <label for="password">Password</label><br>
+    <label for="password">Passwort</label><br>
     <input type="password" id="password" name="password" maxlength="20">
 
 </p>
-<button>Sign Up</button>
+<button>Registrieren</button>
 </form>
-
-
+<br>
+<form action="/Verposter/login" method = "get">
+<button>Zur Anmeldung</button>
+</form>
 
     <script>
         const form = document.getElementById("reg-form");
@@ -51,11 +53,11 @@
             if (response.ok) {
                 window.location.href = "/Verposter/login"
             } else if (response.status === 409) {
-                alert("Username already exists");
+                alert("Der Bneutzername ist bereits vergeben");
             } else if (response.status === 401) {
-                alert("Wrong username or password");
+                alert("Falscher Benutzername oder Passwort");
             } else {
-                alert("Server error");
+                alert("Server Fehler");
             }
         });
 

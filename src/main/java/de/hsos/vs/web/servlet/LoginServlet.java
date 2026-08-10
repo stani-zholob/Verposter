@@ -2,6 +2,7 @@ package de.hsos.vs.web.servlet;
 
 import com.google.gson.Gson;
 import de.hsos.vs.web.entities.User;
+import de.hsos.vs.web.inmemory.Member;
 import de.hsos.vs.wordservice.db.UserDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -58,17 +59,19 @@ public class LoginServlet extends HttpServlet {
         try {
             // in einer Datenbank suchen also ein Objekt aus einer Datebank
             User user = userDAO.findByName(newUser.getName()).orElse(null);
+            Member member = new Member(user.getId(), user.getName());
 
 
             //falls es nicht in der Tabelle oder den Passwort nicht stimmt, dann redirect zurück
-            if (user == null || !newUser.getPassword().equals(user.getPassword())) {
+            if (!newUser.getPassword().equals(user.getPassword())) {
                 resp.sendRedirect(req.getContextPath() + "/login.html");
             }
 
             //neue Session erzeuen
             HttpSession session = req.getSession();
-            session.setAttribute("userId", user.getId());
-            session.setAttribute("username", user.getName());
+            session.setAttribute("userId", member.getId());
+            session.setAttribute("username", member.getName());
+            session.setAttribute("isReady", member.isReady());
 
             //redirect weiter
             resp.sendRedirect(req.getContextPath() + "/lobby");

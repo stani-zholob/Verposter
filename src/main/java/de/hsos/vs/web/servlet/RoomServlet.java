@@ -1,11 +1,10 @@
-package de.hsos.vs.entities;
+package de.hsos.vs.web.servlet;
 
 
 import com.google.gson.Gson;
-import de.hsos.vs.services.LobbyService;
+import de.hsos.vs.web.entities.Lobby;
 import de.hsos.vs.web.inmemory.Member;
 import de.hsos.vs.web.inmemory.Room;
-import de.hsos.vs.web.entities.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -22,14 +21,12 @@ import java.util.List;
  */
 @WebServlet("/api/rooms/*")
 public class RoomServlet extends HttpServlet {
-    LobbyService service = new LobbyService();
-    ArrayList<Room> rooms = service.getRooms();
+    Lobby lobby = new Lobby();
+    ArrayList<Room> rooms = lobby.getRooms();
 
     @Override
     public void init() throws ServletException {
-        rooms.add(new Room(0,"VS gang"));
-        rooms.add(new Room(1,"loosers kommt vorbei"));
-        rooms.add(new Room(2,"Keine Name"));
+
     }
 
     @Override
@@ -57,10 +54,25 @@ public class RoomServlet extends HttpServlet {
         }
         resp.getWriter().write(gson.toJson(foundRoom));
         }
+
+        // /api/rooms/1
+        if (pathParts.length == 1) {
+            resp.setContentType("application/json");
+            Gson gson = new Gson();
+
+            int roomId = getRoomIndex(req);
+            Room currentRoom = rooms.get(roomId);
+            resp.getWriter().write(gson.toJson(currentRoom));
+            System.out.println(currentRoom);
+        }
+
+
+        // /api/rooms/1/members
         if (pathParts.length == 2 && pathParts[1].equals("members")) {
             int roomId = Integer.parseInt(pathParts[0]);
             HttpSession session = req.getSession(false);
             Integer userId = (Integer) session.getAttribute("userId");
+            String username = (String) session.getAttribute("username");
 
             if (session == null || userId == null) {
                 resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
@@ -68,15 +80,18 @@ public class RoomServlet extends HttpServlet {
             }
 
             //TESTS
-            System.out.println(roomId + " " + userId);
-            ArrayList<Room> rooms = service.getRooms();
+            System.out.println(roomId + " " + userId + " " + username);
+            ArrayList<Room> rooms = lobby.getRooms();
             Room currentRoom = rooms.get(roomId);
 
             List<Member> members = currentRoom.getMembers();
 
-            resp.setStatus(HttpServletResponse.SC_OK);
+
             resp.setContentType("application/json");
             resp.getWriter().write(new Gson().toJson(members));
+            resp.setStatus(HttpServletResponse.SC_OK);
+
+            System.out.println(members);
 
             return;
         }
@@ -88,7 +103,7 @@ public class RoomServlet extends HttpServlet {
 
         //POST /api/rooms/*
 
-        //POST /api/rooms/       JSON:{"name": name}if (g)
+        //POST /api/rooms/       JSON:{"name": name}
         if (pathParts.length == 0) {
             Gson gson = new Gson();
             resp.setContentType("application/json");
@@ -115,7 +130,7 @@ public class RoomServlet extends HttpServlet {
             //TESTS
             System.out.println(roomId + " " + userId);
 
-            Room room = service.joinRoom(roomId, userId);
+            Room room = lobby.getRoomById(roomId);
             resp.setStatus(HttpServletResponse.SC_OK);
             resp.setContentType("application/json");
             resp.getWriter().write(new Gson().toJson(room));

@@ -1,6 +1,5 @@
 package de.hsos.vs.web.servlet;
 
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,13 +9,8 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-/**
- * @author Stanislav
- */
-@WebServlet("/lobby")
-public class LobbyServlet extends HttpServlet {
-
-
+@WebServlet("/gamestart")
+public class GameStartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
@@ -24,7 +18,7 @@ public class LobbyServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/login");
             return;
         }
-        req.getRequestDispatcher("/lobby.html").forward(req, resp);
+        req.getRequestDispatcher("/gamestart.html").forward(req, resp);
     }
 
     @Override

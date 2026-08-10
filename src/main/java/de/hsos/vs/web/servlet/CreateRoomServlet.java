@@ -1,6 +1,6 @@
 package de.hsos.vs.web.servlet;
 
-import de.hsos.vs.services.LobbyService;
+import de.hsos.vs.web.entities.Lobby;
 import de.hsos.vs.web.inmemory.Room;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 @WebServlet("/createroom")
 public class CreateRoomServlet extends HttpServlet {
-    LobbyService service = new LobbyService();
+    Lobby service = new Lobby();
     ArrayList<Room> rooms = service.getRooms();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

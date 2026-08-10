@@ -6,20 +6,21 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Verposter - Bereit?</title>
+    <title>Verposter</title>
 </head>
-<body>
+<body style="text-align: center;">
+
 
 <h1>VERPOSTER</h1>
 
 
 <p>Warten auf die anderen Spieler </p>
-<table border="1" cellpadding="5">
+<table border="1" cellpadding="5" style="margin: 0 auto;">
     <thead>
     <tr>
-        <th>Id</th>
-        <th>Player</th>
-
+        <th>Nr</th>
+        <th>Spieler</th>
+        <th>Bereit</th>
     </tr>
     </thead>
 
@@ -29,27 +30,26 @@
 </table>
 
 <script>
-    async function getUsers(){
-        const resp = await fetch('/Verposter/api/users');
-        const users = await resp.json();
-        console.log(users);
-
+    async function getMembers(){
+        const resp = await fetch('/Verposter/api/rooms/0/members');
+        const members = await resp.json();
+        console.log(members);
 
         const table = document.getElementById("users-table");
-        for(const user of users){
+        for(const member of members){
             const row = document.createElement("tr");
             row.innerHTML = `
-                <td>${user.id}</td>
-                <td>${user.name}</td>
-                <td> <form action = "/showcard.html" method = "get"> <button type="button" name = "ready"> Ready </button> </form> </td>`;
+                <td>${member.id}</td>
+                <td>${member.name}</td>
+                <td>${member.isReady}</td>`;
             table.append(row);
         }
     }
-    getUsers();
+    getMembers();
 </script>
 
 <form action="/showcard.html", ></form>
-<p><button type="button">ready</button></p>
+<p><button type="button">Bereit</button></p>
 
 
 </body>

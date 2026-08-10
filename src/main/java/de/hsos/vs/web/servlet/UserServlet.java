@@ -1,18 +1,16 @@
 //package de.hsos.vs.entities;
 //
 //import com.google.gson.Gson;
+//import de.hsos.vs.web.entities.Lobby;
 //import de.hsos.vs.services.LobbyService;
-//import de.hsos.vs.web.inmemory.Room;
 //import de.hsos.vs.web.entities.User;
 //import jakarta.servlet.ServletException;
 //import jakarta.servlet.annotation.WebServlet;
 //import jakarta.servlet.http.HttpServlet;
 //import jakarta.servlet.http.HttpServletRequest;
 //import jakarta.servlet.http.HttpServletResponse;
-//import jakarta.servlet.http.HttpSession;
 //
 //import java.io.IOException;
-//import java.io.PrintWriter;
 //import java.util.ArrayList;
 ///**
 // * @author Stanislav
@@ -20,8 +18,8 @@
 //@WebServlet("/api/users/*")
 //public class UserServlet extends HttpServlet {
 //    //UserDao userDao = new UserDao();
-//    LobbyService service;
-//    ArrayList<User> users = service.getUsers();
+//    Lobby lobby;
+//    ArrayList<User> users = lobby.getUsers();
 //
 //    @Override
 //    public void init() throws ServletException {

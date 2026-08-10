@@ -6,27 +6,23 @@
     <meta charset="UTF-8">
     <title>Verposter - Sign In</title>
 </head>
-<body>
+<body style="text-align: center;">
 
 <h1>VERPOSTER</h1>
 
-<h2>Sign In</h2>
+<h2>Anmelden</h2>
 
 <p>
     <form id="login-form" action = "/Verposter/login" method = "post">
 
-    <label for="username">Your Username</label><br>
-    <input type="text" id="username" name="username" maxlength="20"required>
+    <label for="username">Benutzername</label><br>
+    <input type="text" id="username" name="username" maxlength="20"required><br>
 
-    <label for="password"></label><br>
+    <label for="password">Passwort</label><br>
     <input type="password" id="password" name="password" maxlength="20" required>
-
-    <p>
-        login: 1235, password: 1235
-    </p>
 </p>
 
-<button> Login </button>
+<button> Anmelden </button>
 </form>
 
 
@@ -55,16 +51,16 @@
         if (resp.ok) {
             window.location.href = "/Verposter/lobby";
         } else if (resp.status === 401) {
-            alert("Wrong username or password");
+            alert("Falscher Benutzername oder Passwort");
         } else {
-            alert("Server error");
+            alert("Server Fehler");
         }
     });
 </script>
 
-
+<br>
 <form action = "/Verposter/register" method = "get">
-<button> Register </button>
+<button> Zur Registrierung </button>
 </form>
 
 </body>
