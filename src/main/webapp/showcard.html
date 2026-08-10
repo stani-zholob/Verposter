@@ -9,11 +9,27 @@
 <h1>VERPOSTER</h1>
 
 <p>The word is</p>
+<h2 id="word"> </h2>
+<input id="message-input" type="text"> <button id="send-button">Send</button>
 
-<p>[Kartenbild]</p>
-<h2>Princess</h2>
 
-<p><b>You are Impostor</b></p>
+<script>
+    const socket = new WebSocket("ws://localhost:8080/Verposter/ws");
 
+    socket.onopen = () => {
+        console.log("verbunden")
+    }
+    socket.onmessage = (event) => {
+        document.getElementById("word").textContent = event.data;
+    }
+    socket.onclose = () => {
+        console.log("geschlossen");
+    }
+    document.getElementById("send-button").onclick = () => {
+        const message = document.getElementById("message-input").value;
+        socket.send(message);
+    };
+</script>
+<p></p>
 </body>
 </html>

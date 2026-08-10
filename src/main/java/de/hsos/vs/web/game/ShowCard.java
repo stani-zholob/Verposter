@@ -1,10 +1,41 @@
 package de.hsos.vs.web.game;
 
-import jakarta.servlet.http.HttpServlet;
+import jakarta.websocket.*;
+import jakarta.websocket.server.ServerEndpoint;
 
-/**
- * @author Lukas
- */
-public class ShowCard extends HttpServlet {
+import java.io.PrintWriter;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+
+@ServerEndpoint("/ws")
+public class ShowCard {
+
+    private static final Map<String, Session> users = new ConcurrentHashMap<>();
+    @OnOpen
+    public void onOpen(Session session) {
+        String userId = session.getId();
+        users.put(userId, session);
+    }
+
+    public static void sendToUser(String userId, String message) {
+        Session session = users.get(userId);
+        if (session != null) {
+            session.getAsyncRemote().sendText(message);
+        }
+    }
+    @OnMessage
+    public void onMessage(String message, Session session) {
+        if (message.equals("start")) {
+            sendToUser("0", "Imposter");
+            sendToUser("1", "Princess");
+            sendToUser("2", "Princess");
+        }
+    }
+
+    @OnClose
+    public void onClose(Session session) {
+        users.remove(session.getId());
+    }
 
 }
