@@ -1,6 +1,5 @@
 package de.hsos.vs.web.entities;
 
-import de.hsos.vs.web.inmemory.Room;
 import de.hsos.vs.wordservice.db.UserDAO;
 
 import java.util.ArrayList;

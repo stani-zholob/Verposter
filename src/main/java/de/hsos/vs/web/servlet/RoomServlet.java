@@ -3,8 +3,8 @@ package de.hsos.vs.web.servlet;
 
 import com.google.gson.Gson;
 import de.hsos.vs.web.entities.Lobby;
-import de.hsos.vs.web.inmemory.Member;
-import de.hsos.vs.web.inmemory.Room;
+import de.hsos.vs.web.entities.Member;
+import de.hsos.vs.web.entities.Room;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -66,37 +66,34 @@ public class RoomServlet extends HttpServlet {
             System.out.println(currentRoom);
         }
 
-
         // /api/rooms/1/members
         if (pathParts.length == 2 && pathParts[1].equals("members")) {
             int roomId = Integer.parseInt(pathParts[0]);
             HttpSession session = req.getSession(false);
+
             Integer userId = (Integer) session.getAttribute("userId");
             String username = (String) session.getAttribute("username");
-
-            if (session == null || userId == null) {
+            Boolean ready = (Boolean) session.getAttribute("ready");
+            if (userId == null || username == null || ready == null) {
                 resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                 return;
             }
 
-            //TESTS
-            System.out.println(roomId + " " + userId + " " + username);
             ArrayList<Room> rooms = lobby.getRooms();
             Room currentRoom = rooms.get(roomId);
-
             List<Member> members = currentRoom.getMembers();
-
 
             resp.setContentType("application/json");
             resp.getWriter().write(new Gson().toJson(members));
             resp.setStatus(HttpServletResponse.SC_OK);
 
             System.out.println(members);
-
-            return;
         }
     }
 
+    /**
+     * @author Lukas, Stanislav
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String[] pathParts = getPathParts(req);
@@ -124,19 +121,26 @@ public class RoomServlet extends HttpServlet {
             if (userId == null) {
                 resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
             }
-            Member member = new Member(userId,username);
-            rooms.get(roomId).addMember(member);
-
-            //TESTS
-            System.out.println(roomId + " " + userId);
 
             Room room = lobby.getRoomById(roomId);
+            Member member = new Member(userId,username);
+
+            for (Member m : room.getMembers()) {
+                if (m.getId() == userId) {
+                    System.out.println("Benutzer ist bereits im Raum");
+                    resp.sendRedirect("/Verposter/gamestart");
+                    return;
+                }
+            }
+
+            rooms.get(roomId).addMember(member);
+
+            System.out.println(roomId + " " + userId);
+
             resp.setStatus(HttpServletResponse.SC_OK);
             resp.setContentType("application/json");
             resp.getWriter().write(new Gson().toJson(room));
             resp.sendRedirect("/Verposter/gamestart");
-
-            return;
         }
     }
 

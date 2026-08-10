@@ -41,15 +41,15 @@
             row.innerHTML = `
                 <td>${member.id}</td>
                 <td>${member.name}</td>
-                <td>${member.isReady}</td>`;
+                <td>${member.ready ? "&#10003;" : "&#10007;"}</td>`;
             table.append(row);
         }
     }
     getMembers();
 </script>
 
-<form action="/showcard.html", ></form>
-<p><button type="button">Bereit</button></p>
+<form action="/showcard.html"></form>
+<p><button type="button">Bereit</button>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button">Verlassen</button></p>
 
 
 </body>

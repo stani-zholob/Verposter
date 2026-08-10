@@ -1,7 +1,7 @@
 package de.hsos.vs.web.servlet;
 
 import de.hsos.vs.web.entities.Lobby;
-import de.hsos.vs.web.inmemory.Room;
+import de.hsos.vs.web.entities.Room;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

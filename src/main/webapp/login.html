@@ -4,28 +4,23 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Verposter - Sign In</title>
+    <title>Verposter - Anmelden</title>
 </head>
 <body style="text-align: center;">
 
 <h1>VERPOSTER</h1>
 
 <h2>Anmelden</h2>
-
-<p>
-    <form id="login-form" action = "/Verposter/login" method = "post">
-
+<form id="login-form" action = "/Verposter/login" method = "post">
     <label for="username">Benutzername</label><br>
     <input type="text" id="username" name="username" maxlength="20"required><br>
 
     <label for="password">Passwort</label><br>
-    <input type="password" id="password" name="password" maxlength="20" required>
-</p>
+    <input type="password" id="password" name="password" maxlength="20" required><br><br>
 
-<button> Anmelden </button>
+    <button> Anmelden </button>&nbsp;&nbsp;
+    <button type="button" onclick="location.href='/Verposter/register'"> Zur Registrierung </button>
 </form>
-
-
 
 <script>
     const form = document.getElementById("login-form");
@@ -57,11 +52,5 @@
         }
     });
 </script>
-
-<br>
-<form action = "/Verposter/register" method = "get">
-<button> Zur Registrierung </button>
-</form>
-
 </body>
 </html>

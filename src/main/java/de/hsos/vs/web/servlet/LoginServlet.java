@@ -2,7 +2,7 @@ package de.hsos.vs.web.servlet;
 
 import com.google.gson.Gson;
 import de.hsos.vs.web.entities.User;
-import de.hsos.vs.web.inmemory.Member;
+import de.hsos.vs.web.entities.Member;
 import de.hsos.vs.wordservice.db.UserDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -71,7 +71,7 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = req.getSession();
             session.setAttribute("userId", member.getId());
             session.setAttribute("username", member.getName());
-            session.setAttribute("isReady", member.isReady());
+            session.setAttribute("ready", member.isReady());
 
             //redirect weiter
             resp.sendRedirect(req.getContextPath() + "/lobby");

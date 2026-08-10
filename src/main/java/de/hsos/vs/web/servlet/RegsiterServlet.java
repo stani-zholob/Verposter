@@ -29,23 +29,20 @@ public class RegsiterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Gson gson = new Gson();
         User userFromJson = gson.fromJson(req.getReader(), User.class);
-
-        //hier hashen
         User newUser  = new User(0,userFromJson.getName(), userFromJson.getPassword());
 
         try {
             if(userDAO.findByName(newUser.getName()).isPresent()){
                 resp.setStatus(HttpServletResponse.SC_CONFLICT);
-                resp.getWriter().println("Username already exists");
+                resp.getWriter().println("Benutzername existiert bereits");
                 return;
             }
             userDAO.insert(newUser.getName(), newUser.getPassword());
             resp.setStatus(HttpServletResponse.SC_CREATED);
-            resp.getWriter().println("Successfully registered");
+            resp.getWriter().println("Erfolgreich registriert");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-        resp.sendRedirect("/login");
+        // kein Redirect: register.html leitet bei response.ok selbst auf /login weiter
     }
 }
