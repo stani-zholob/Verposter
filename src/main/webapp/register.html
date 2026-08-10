@@ -11,22 +11,16 @@
 <h1>VERPOSTER</h1>
 
 <h2>Registrieren</h2>
-
-<p>
 <form id="reg-form" action = "/Verposter/register" method = "post">
 
     <label for="username">Benutzername</label><br>
     <input type="text" id="username" name="username" maxlength="20"><br>
 
     <label for="password">Passwort</label><br>
-    <input type="password" id="password" name="password" maxlength="20">
+    <input type="password" id="password" name="password" maxlength="20"><br><br>
 
-</p>
-<button>Registrieren</button>
-</form>
-<br>
-<form action="/Verposter/login" method = "get">
-<button>Zur Anmeldung</button>
+    <button>Registrieren</button>&nbsp;&nbsp;
+    <button type="button" onclick="location.href='/Verposter/login'"> Zur Anmeldung </button>
 </form>
 
     <script>
@@ -53,7 +47,7 @@
             if (response.ok) {
                 window.location.href = "/Verposter/login"
             } else if (response.status === 409) {
-                alert("Der Bneutzername ist bereits vergeben");
+                alert("Der Benutzername ist bereits vergeben");
             } else if (response.status === 401) {
                 alert("Falscher Benutzername oder Passwort");
             } else {

@@ -2,7 +2,7 @@ package de.hsos.vs.web.servlet;
 
 import com.google.gson.Gson;
 import de.hsos.vs.web.entities.User;
-import de.hsos.vs.web.inmemory.Member;
+import de.hsos.vs.web.entities.Member;
 import de.hsos.vs.wordservice.db.UserDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

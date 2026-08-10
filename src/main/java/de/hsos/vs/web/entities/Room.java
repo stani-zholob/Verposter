@@ -1,4 +1,4 @@
-package de.hsos.vs.web.inmemory;
+package de.hsos.vs.web.entities;
 
 import java.util.ArrayList;
 import java.util.List;

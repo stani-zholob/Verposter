@@ -3,8 +3,8 @@ package de.hsos.vs.web.servlet;
 
 import com.google.gson.Gson;
 import de.hsos.vs.web.entities.Lobby;
-import de.hsos.vs.web.inmemory.Member;
-import de.hsos.vs.web.inmemory.Room;
+import de.hsos.vs.web.entities.Member;
+import de.hsos.vs.web.entities.Room;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -73,19 +73,16 @@ public class RoomServlet extends HttpServlet {
             HttpSession session = req.getSession(false);
             Integer userId = (Integer) session.getAttribute("userId");
             String username = (String) session.getAttribute("username");
+            Boolean ready = (Boolean) session.getAttribute("ready");
 
             if (session == null || userId == null) {
                 resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                 return;
             }
 
-            //TESTS
-            System.out.println(roomId + " " + userId + " " + username);
             ArrayList<Room> rooms = lobby.getRooms();
             Room currentRoom = rooms.get(roomId);
-
             List<Member> members = currentRoom.getMembers();
-
 
             resp.setContentType("application/json");
             resp.getWriter().write(new Gson().toJson(members));
@@ -124,13 +121,23 @@ public class RoomServlet extends HttpServlet {
             if (userId == null) {
                 resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
             }
+
             Member member = new Member(userId,username);
+
+            for (Member m : room.getMembers()) {
+                if (m.getId() == userId) {
+                    resp.sendError(HttpServletResponse.SC_CONFLICT, "Benutzer ist bereits im Raum");
+                    return;
+                }
+            }
+
             rooms.get(roomId).addMember(member);
 
             //TESTS
             System.out.println(roomId + " " + userId);
 
             Room room = lobby.getRoomById(roomId);
+
             resp.setStatus(HttpServletResponse.SC_OK);
             resp.setContentType("application/json");
             resp.getWriter().write(new Gson().toJson(room));
