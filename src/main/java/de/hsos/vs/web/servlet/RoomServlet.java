@@ -122,6 +122,7 @@ public class RoomServlet extends HttpServlet {
                 resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
             }
 
+            Room room = lobby.getRoomById(roomId);
             Member member = new Member(userId,username);
 
             for (Member m : room.getMembers()) {
@@ -135,8 +136,6 @@ public class RoomServlet extends HttpServlet {
 
             //TESTS
             System.out.println(roomId + " " + userId);
-
-            Room room = lobby.getRoomById(roomId);
 
             resp.setStatus(HttpServletResponse.SC_OK);
             resp.setContentType("application/json");
