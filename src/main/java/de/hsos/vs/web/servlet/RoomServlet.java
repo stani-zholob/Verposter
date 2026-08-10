@@ -127,7 +127,8 @@ public class RoomServlet extends HttpServlet {
 
             for (Member m : room.getMembers()) {
                 if (m.getId() == userId) {
-                    resp.sendError(HttpServletResponse.SC_CONFLICT, "Benutzer ist bereits im Raum");
+                    System.out.println("Benutzer ist bereits im Raum");
+                    resp.sendRedirect("/Verposter/gamestart");
                     return;
                 }
             }
