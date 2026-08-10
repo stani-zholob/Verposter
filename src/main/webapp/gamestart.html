@@ -41,7 +41,7 @@
             row.innerHTML = `
                 <td>${member.id}</td>
                 <td>${member.name}</td>
-                <td>${member.ready}</td>`;
+                <td>${member.ready ? "&#10003;" : "&#10007;"}</td>`;
             table.append(row);
         }
     }

@@ -71,7 +71,7 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = req.getSession();
             session.setAttribute("userId", member.getId());
             session.setAttribute("username", member.getName());
-            session.setAttribute("isReady", member.isReady());
+            session.setAttribute("ready", member.isReady());
 
             //redirect weiter
             resp.sendRedirect(req.getContextPath() + "/lobby");
