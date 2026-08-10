@@ -134,6 +134,7 @@ public class RoomServlet extends HttpServlet {
             resp.setStatus(HttpServletResponse.SC_OK);
             resp.setContentType("application/json");
             resp.getWriter().write(new Gson().toJson(room));
+            resp.sendRedirect("/Verposter/gamestart");
 
             return;
         }

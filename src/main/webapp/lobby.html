@@ -20,7 +20,6 @@
             <th>Raum</th>
             <th>Name</th>
             <th>Beitreten</th>
-
         </tr>
     </thead>
 
@@ -46,10 +45,8 @@
                 <td>${room.id}</td>
                 <td>${room.name}</td>
                 <td>
-                    <form action="Verposter/gamestart" method="get">
                         <form action="/Verposter/api/rooms/${n}/members" method="post">
                             <button type="submit"> Beitreten </button>
-                        </form>
                     </form>
                 </td> `;
             table.append(row);
