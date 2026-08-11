@@ -10,7 +10,8 @@
 
 <p>The word is</p>
 <h2 id="word"> </h2>
-<input id="message-input" type="text"> <button id="send-button">Send</button>
+<!--<input id="message-input" type="text"> -->
+<button id="send-button">Zeige mein Wort</button>
 
 
 <script>
@@ -26,10 +27,9 @@
         console.log("geschlossen");
     }
     document.getElementById("send-button").onclick = () => {
-        const message = document.getElementById("message-input").value;
+        const message = document.getElementById("send-button").value;
         socket.send(message);
     };
 </script>
-<p></p>
 </body>
 </html>

@@ -7,7 +7,6 @@ import java.util.ArrayList;
  * @author Stanislav
  */
 public class Lobby {
-    UserDAO userDao = new UserDAO();
     ArrayList<Room> rooms = new ArrayList<>();
 
     public Room getRoomById(int id) {

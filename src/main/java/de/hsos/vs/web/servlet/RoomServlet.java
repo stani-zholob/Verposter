@@ -86,8 +86,6 @@ public class RoomServlet extends HttpServlet {
             resp.setContentType("application/json");
             resp.getWriter().write(new Gson().toJson(members));
             resp.setStatus(HttpServletResponse.SC_OK);
-
-            System.out.println(members);
         }
     }
 
@@ -164,6 +162,10 @@ public class RoomServlet extends HttpServlet {
             member.setReady(!member.isReady());
 
             session.setAttribute("ready", member.isReady());
+
+            if (room.allMemberReady()) {
+                resp.sendRedirect("/Verposter/showcard.html");
+            }
 
             resp.setStatus(HttpServletResponse.SC_OK);
             resp.setContentType("application/json");

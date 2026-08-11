@@ -1,5 +1,6 @@
 package de.hsos.vs.web.game;
 
+import de.hsos.vs.wordservice.db.TopicDAO;
 import jakarta.websocket.*;
 import jakarta.websocket.server.ServerEndpoint;
 
@@ -26,11 +27,10 @@ public class ShowCard {
     }
     @OnMessage
     public void onMessage(String message, Session session) {
-        if (message.equals("start")) {
-            sendToUser("0", "Imposter");
+
+            sendToUser("0", "You're Imposter");
             sendToUser("1", "Princess");
             sendToUser("2", "Princess");
-        }
     }
 
     @OnClose

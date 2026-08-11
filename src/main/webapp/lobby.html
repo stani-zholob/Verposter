@@ -38,6 +38,7 @@
 
 
         const table = document.getElementById("rooms-table");
+        table.innerHTML = "";
         for(const room of rooms){
             const row = document.createElement("tr");
             row.innerHTML = `
@@ -52,6 +53,7 @@
         }
     }
     getRooms();
+    setInterval(getRooms, 2000);
 </script>
 
 </body>
