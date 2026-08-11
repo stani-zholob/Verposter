@@ -45,14 +45,4 @@ public class Room {
     public void setUser(List<Member> members) {
         this.members = members;
     }
-
-    public boolean allMemberReady() {
-        if (members.size() <= 2) return false;
-        for (Member member : members) {
-            if (!member.isReady()) {
-                return false;
-            }
-        }
-        return true;
-    }
 }

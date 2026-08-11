@@ -29,6 +29,20 @@
     </tbody>
 </table>
 
+<p>Themen</p>
+<table border="1" cellpadding="5" style="margin: 0 auto;">
+    <thead>
+    <tr>
+        <th>Nr</th>
+        <th>Thema</th>
+    </tr>
+    </thead>
+
+    <tbody id="topics-table">
+
+    </tbody>
+</table>
+
 <p><button type="button" id="ready-button">Bereit</button>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" id="leave-button">Verlassen</button></p>
 
 <script>
@@ -50,7 +64,7 @@
             table.append(row);
         }
 
-        if (members.length > 0 && members.every(m => m.ready)) {
+        if (members.length > 2 && members.every(m => m.ready)) {
             window.location.href = "/Verposter/showcard.html";
         }
     }
@@ -75,7 +89,24 @@
         window.location.href = "/Verposter/lobby";
     });
 
+    async function getTopics(){
+        const resp = await fetch(`/Verposter/api/topics`);
+        const topics = await resp.json();
+        console.log(topics);
+
+        const table = document.getElementById("topics-table");
+        table.innerHTML = "";
+        for(const topic of topics){
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${topic.id}</td>
+                <td>${topic.name}</td>`;
+            table.append(row);
+        }
+    }
+
     getMembers();
+    getTopics();
     setInterval(getMembers, 2000);
 </script>
 </body>
