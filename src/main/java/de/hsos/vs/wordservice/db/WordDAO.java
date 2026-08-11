@@ -70,6 +70,7 @@ public class WordDAO {
         }
     }
 
+
     private Word map(ResultSet rs) throws SQLException {
         return new Word(rs.getInt("id"), rs.getInt("topicId"),
                 rs.getString("word"), rs.getString("tip"));
