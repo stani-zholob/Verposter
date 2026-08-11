@@ -29,8 +29,7 @@
     </tbody>
 </table>
 
-<form action="/showcard.html"></form>
-<p><button type="button" id="ready-button">Bereit</button>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button">Verlassen</button></p>
+<p><button type="button" id="ready-button">Bereit</button>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" id="leave-button">Verlassen</button></p>
 
 <script>
     const ROOM_ID = new URLSearchParams(window.location.search).get("roomId");
@@ -50,6 +49,10 @@
                 <td>${member.ready ? "&#10003;" : "&#10007;"}</td>`;
             table.append(row);
         }
+
+        if (members.length > 0 && members.every(m => m.ready)) {
+            window.location.href = "/Verposter/showcard.html";
+        }
     }
 
     document.getElementById("ready-button").addEventListener("click", async function () {
@@ -60,6 +63,16 @@
             return;
         }
         await getMembers();
+    });
+
+    document.getElementById("leave-button").addEventListener("click", async function () {
+        const resp = await fetch(`/Verposter/api/rooms/${ROOM_ID}/members/leave`, {
+            method: "DELETE"
+        });
+        if (!resp.ok) {
+            return;
+        }
+        window.location.href = "/Verposter/lobby";
     });
 
     getMembers();

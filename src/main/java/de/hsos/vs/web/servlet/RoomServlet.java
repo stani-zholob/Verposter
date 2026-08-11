@@ -148,9 +148,11 @@ public class RoomServlet extends HttpServlet {
             int roomId = Integer.parseInt(pathParts[0]);
 
             HttpSession session = req.getSession(false);
+            if (session == null) return;
             int userId = (Integer) session.getAttribute("userId");
 
             Room room = lobby.getRoomById(roomId);
+            if (room == null) return;
             Member member = null;
             for (Member m : room.getMembers()) {
                 if (m.getId() == userId) {
@@ -159,17 +161,42 @@ public class RoomServlet extends HttpServlet {
                 }
             }
 
+            if (member == null) return;
             member.setReady(!member.isReady());
 
             session.setAttribute("ready", member.isReady());
 
-            if (room.allMemberReady()) {
-                resp.sendRedirect("/Verposter/showcard.html");
+            resp.setStatus(HttpServletResponse.SC_OK);
+            resp.getWriter().write(new Gson().toJson(room.getMembers()));
+        }
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String[] pathParts = getPathParts(req);
+
+        // DELETE /api/rooms/1/members/leave
+        if (pathParts.length == 3 && pathParts[1].equals("members") && pathParts[2].equals("leave")) {
+            int roomId = Integer.parseInt(pathParts[0]);
+
+            HttpSession session = req.getSession(false);
+            if (session == null) return;
+            int userId = (Integer) session.getAttribute("userId");
+
+            Room room = lobby.getRoomById(roomId);
+            if (room == null) return;
+            Member member = null;
+            for (Member m : room.getMembers()) {
+                if (m.getId() == userId) {
+                    member = m;
+                    break;
+                }
             }
 
-            resp.setStatus(HttpServletResponse.SC_OK);
-            resp.setContentType("application/json");
-            resp.getWriter().write(new Gson().toJson(room.getMembers()));
+            if (member == null) return;
+
+            room.removeMember(member);
+            resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
         }
     }
 

@@ -47,6 +47,7 @@ public class Room {
     }
 
     public boolean allMemberReady() {
+        if (members.size() <= 2) return false;
         for (Member member : members) {
             if (!member.isReady()) {
                 return false;
