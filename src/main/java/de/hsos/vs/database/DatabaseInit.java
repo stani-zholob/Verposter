@@ -29,6 +29,7 @@ public class DatabaseInit {
             wordDAO.insert(clashRoyale.getId(), "Tornado", "Bekannt für King Tower Activation");
             wordDAO.insert(clashRoyale.getId(), "Mega Ritter", "Bekannt für No Skill");
 
+            // Dieser Abschnitt ist mit KI generiert
             Topic tiere = topicDAO.insert("Tiere");
             wordDAO.insert(tiere.getId(), "Elefant", "Hat die größten Ohren");
             wordDAO.insert(tiere.getId(), "Pinguin", "Kann nicht fliegen, aber schwimmen");
@@ -56,6 +57,8 @@ public class DatabaseInit {
             wordDAO.insert(berufe.getId(), "Lehrer", "Steht vor der Tafel");
             wordDAO.insert(berufe.getId(), "Bäcker", "Fängt mitten in der Nacht an");
             wordDAO.insert(berufe.getId(), "Feuerwehrmann", "Kommt mit Blaulicht");
+            // Hier endet der KI generierte Abschitt.
+            // Prompt: Generiere Themen und Wörter nach diesem Vorbild für Datenbank für unser Imposterspiel <<ClashRoyale Code Beispiel von Oben beigefügt>>
 
             //  Erste Anmeldedaten
             userDAO.insert("admin", "admin");

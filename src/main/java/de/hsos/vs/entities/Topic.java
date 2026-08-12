@@ -6,8 +6,8 @@ package de.hsos.vs.entities;
  * @author Lukas
  */
 public class Topic {
-    private int id;
-    private String name;
+    private final int id;
+    private final String name;
 
     public Topic(int id, String name) {
         this.id = id;

@@ -5,10 +5,10 @@ package de.hsos.vs.entities;
  * @author Stanislav
  */
 public class Word {
-    private int id;
-    private int topicId;
-    private String word; // bekommen die normalen Spieler
-    private String hint; // bekommt der verposter
+    private final int id;
+    private final int topicId;
+    private final String word; // bekommen die normalen Spieler
+    private final String hint; // bekommt der verposter
 
     public Word(int id, int topicId, String word, String hint) {
         this.id = id;
@@ -19,10 +19,6 @@ public class Word {
 
     public int getId() {
         return id;
-    }
-
-    public int getTopicId() {
-        return topicId;
     }
 
     public String getWord() {

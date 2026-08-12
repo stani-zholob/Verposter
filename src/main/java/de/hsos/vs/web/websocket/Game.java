@@ -17,7 +17,6 @@ import java.util.Random;
 
 @ServerEndpoint(value = "/ws/rooms/{roomId}", configurator = HttpSessionConfigurator.class)
 public class Game {
-
     private static final int MIN_PLAYERS = 3;
     private static final Random random = new Random();
     private final WordDAO wordDAO = new WordDAO();

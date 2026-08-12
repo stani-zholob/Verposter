@@ -5,7 +5,6 @@ import com.google.gson.Gson;
 import de.hsos.vs.entities.Lobby;
 import de.hsos.vs.entities.Member;
 import de.hsos.vs.entities.Room;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,7 +25,7 @@ public class RoomServlet extends HttpServlet {
      * @author Stanislav
      */
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String[] pathParts = getPathParts(req);
 
         // GET /api/rooms
@@ -72,7 +71,7 @@ public class RoomServlet extends HttpServlet {
      * @author Lukas, Stanislav
      */
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String[] pathParts = getPathParts(req);
 
         //POST /api/rooms/*
@@ -119,7 +118,7 @@ public class RoomServlet extends HttpServlet {
      * @author Lukas
      */
     @Override
-    protected void doPatch(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPatch(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String[] pathParts = getPathParts(req);
 
         // PATCH /api/rooms/1/members/ready
@@ -151,7 +150,7 @@ public class RoomServlet extends HttpServlet {
      * @author Lukas
      */
     @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) {
         String[] pathParts = getPathParts(req);
 
         // DELETE /api/rooms/1/members/leave

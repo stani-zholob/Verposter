@@ -6,9 +6,9 @@ package de.hsos.vs.entities;
  * @author Lukas
  */
 public class User {
-    private int id;
-    private String name;
-    private String password;
+    private final int id;
+    private final String name;
+    private final String password;
 
     public User(int id, String name, String password) {
         this.id = id;
