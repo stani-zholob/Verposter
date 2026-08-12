@@ -1,10 +1,10 @@
-package de.hsos.vs.web.game;
+package de.hsos.vs.web.websocket;
 
 import de.hsos.vs.util.HttpSessionConfigurator;
-import de.hsos.vs.web.entities.Topic;
-import de.hsos.vs.web.entities.Word;
-import de.hsos.vs.wordservice.db.TopicDAO;
-import de.hsos.vs.wordservice.db.WordDAO;
+import de.hsos.vs.entities.Topic;
+import de.hsos.vs.entities.Word;
+import de.hsos.vs.database.TopicDAO;
+import de.hsos.vs.database.WordDAO;
 import jakarta.servlet.http.HttpSession;
 import jakarta.websocket.*;
 import jakarta.websocket.server.PathParam;
@@ -12,21 +12,22 @@ import jakarta.websocket.server.ServerEndpoint;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 @ServerEndpoint(value = "/ws/rooms/{roomId}", configurator = HttpSessionConfigurator.class)
 public class Game {
 
-    private static final int MIN_PLAYERS = 1;
-    private static final Map<Integer, GameRoom> gameRooms = new HashMap<>();
+    private static final int MIN_PLAYERS = 3;
     private static final Random random = new Random();
     private final WordDAO wordDAO = new WordDAO();
     private static final TopicDAO topicDAO = new TopicDAO();
 
-
+    /**
+     * todo doku
+     *
+     * @author Stanislav
+     */
     @OnOpen
     public void onOpen(Session wsSession, EndpointConfig config, @PathParam("roomId") int roomId) throws SQLException {
         HttpSession httpSession = (HttpSession) config.getUserProperties().get("httpSession");
@@ -52,17 +53,14 @@ public class Game {
                 " ROOMID IST " + wsSession.getUserProperties().get("roomId")
         );
 
-        GameRoom gameRoom = gameRooms.get(roomId);
-        if (gameRoom == null) {
-            gameRoom = new GameRoom();
-            gameRooms.put(roomId, gameRoom);
-        }
+        GameRoom gameRoom = GameRoomRegistry.getOrCreate(roomId);
         gameRoom.addPlayer(wsSession);
 
         if (!gameRoom.isRoundStarted() && gameRoom.getPlayerCount() >= MIN_PLAYERS) {
             gameRoom.setCurrentWord(chooseGameWord());
             gameRoom.setImposterUserId(chooseImposter(gameRoom));
             gameRoom.setRoundStarted(true);
+            Voting.startRoundTimer(gameRoom);
             for (Session player : gameRoom.getPlayers().values()) {
                 sendCard(player, gameRoom);
             }
@@ -71,6 +69,11 @@ public class Game {
         }
     }
 
+    /**
+     * todo doku
+     *
+     * @author Lukas
+     */
     private Integer chooseImposter(GameRoom gameRoom) {
         List<Session> players = new ArrayList<>();
         players.addAll(gameRoom.getPlayers().values());
@@ -78,12 +81,22 @@ public class Game {
         return (Integer) imposter.getUserProperties().get("userId");
     }
 
+    /**
+     * todo doku
+     *
+     * @author Lukas
+     */
     private Word chooseGameWord() throws SQLException {
         List<Topic> topics = topicDAO.findAll();
         Topic topic = topics.get(random.nextInt(topics.size()));
         return wordDAO.findRandomByTopic(topic.getId()).orElse(null);
     }
 
+    /**
+     * todo doku
+     *
+     * @author Lukas
+     */
     private void sendCard(Session session, GameRoom gameRoom) {
         Word currentWord = gameRoom.getCurrentWord();
         Integer userId = (Integer) session.getUserProperties().get("userId");
@@ -93,13 +106,18 @@ public class Game {
         } else if (userId != null && userId.equals(gameRoom.getImposterUserId())) {
             text = "Du bist der Verposter\n";
             text += "Der Tipp lautet: \n";
-            text += currentWord.getTip();
+            text += currentWord.getHint();
         } else {
             text = currentWord.getWord();
         }
         session.getAsyncRemote().sendText("CARD:" + text);
     }
 
+    /**
+     * todo doku
+     *
+     * @author Stanislav
+     */
     @OnMessage
     public void onMessage(String message, Session sender) {
         Integer roomId = (Integer) sender.getUserProperties().get("roomId");
@@ -109,34 +127,47 @@ public class Game {
             return;
         }
 
-        GameRoom gameRoom = gameRooms.get(roomId);
+        GameRoom gameRoom = GameRoomRegistry.get(roomId);
         if (gameRoom == null) {
             return;
         }
 
-        String chatMessage = "CHAT:" + username + ": " + message;
+            String chatMessage = "CHAT:" + username + ": " + message;
 
         for (Session player : gameRoom.getPlayers().values()) {
+            if (message.equalsIgnoreCase(gameRoom.getCurrentWord().getWord().trim())) { // damit niemals das wort geschrieben werden kann
+                chatMessage = "CHAT:" + username + ": " + "###########";
+            }
             player.getAsyncRemote().sendText(chatMessage);
         }
     }
 
+    /**
+     * todo doku
+     *
+     * @author Stanislav
+     */
     @OnClose
     public void onClose(Session session) {
         Integer roomId = (Integer) session.getUserProperties().get("roomId");
         if (roomId == null) {
             return;
         }
-        GameRoom gameRoom = gameRooms.get(roomId);
+        GameRoom gameRoom = GameRoomRegistry.get(roomId);
         if (gameRoom == null) {
             return;
         }
         gameRoom.removePlayer(session);
         if (gameRoom.getPlayerCount() == 0) {
-            gameRooms.remove(roomId);
+            GameRoomRegistry.remove(roomId);
         }
     }
 
+    /**
+     * todo doku
+     *
+     * @author Stanislav
+     */
     @OnError
     public void onError(Session session, Throwable error) {
         error.printStackTrace();

@@ -13,7 +13,7 @@
 <h2>Erstelle einen Raum</h2>
 
 <p>
-<form id = "create-room" action = "/Verposter/api/rooms/" method = "post">
+<form id = "create-room" action = "api/rooms/" method = "post">
 
     <label for="name">Name</label><br>
     <input type="text" id="name" name="name" maxlength="20"required>
@@ -27,7 +27,7 @@
     const form = document.getElementById("create-room");
     form.addEventListener("submit",async (event) => {event.preventDefault()
 
-    const resp = await fetch("/Verposter/api/rooms/", {
+    const resp = await fetch("api/rooms/", {
         method:"POST",
         headers: {
             "Content-Type": "application/json"
@@ -37,9 +37,9 @@
         })
     });
     if (resp.ok){
-        window.location.href = "/Verposter/lobby";
+        window.location.href = "lobby";
     } else{
-        console.error("Room scheisse");
+        alert("Der Raum konnte nicht erstellt werden");
     }
     });
 </script>

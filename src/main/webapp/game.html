@@ -1,34 +1,148 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="de">-->
-<!--<head>-->
-<!--  <meta charset="UTF-8">-->
-<!--  <title>Verposter - Deine Karte</title>-->
-<!--</head>-->
-<!--<body style="text-align: center;">-->
+<!-- Author: Lukas -->
 
-<!--<h1>VERPOSTER</h1>-->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Verposter - Deine Karte</title>
+</head>
+<body style="text-align: center;">
 
-<!--<p>The word is</p>-->
-<!--<input id="message-input" type="text"> <button id="send-button"></button>-->
+<h1>VERPOSTER</h1>
 
+<p>Das Wort ist</p>
+<h2 id="word"> </h2>
 
-<!--<script>-->
-<!--  const ws = new WebSocket(-->
-<!--          "ws://localhost:8080/Verposter/ws"-->
-<!--  );-->
-<!--  const input = document.getElementById("message-input");-->
-<!--  const button = document.getElementById("")-->
-<!--  ws.onopen = () => {-->
+<p>Verbleibende Zeit: <span id="timer">--:--</span></p>
 
 
-<!--  }-->
-<!--</script>-->
+<p><textarea id="chat" rows="10" cols="50" readonly></textarea></p>
+<input id="message" type="text" placeholder="Schreibe eine Nachricht">
+<button onclick="send()">Senden</button>
 
+<p>Wer ist der Verposter?</p>
+<div id="vote-buttons"></div>
+<h3 id="reveal"></h3>
+<p><button type="button" id="lobby-button" style="display: none;">Zurück zur Lobby</button></p>
 
-<!--<p></p>-->
-<!--<h2>Princess</h2>-->
+<script>
+    const roomId = new URLSearchParams(window.location.search).get("roomId")
 
-<!--<p><b>You are Impostor</b></p>-->
+    // Adresse aus der aktuellen Seite ableiten, damit das Spiel auch von einem
+    // anderen Rechner im Netz laeuft und nicht nur auf localhost
+    const wsProtocol = location.protocol === "https:" ? "wss:" : "ws:";
+    const wsBase = `${wsProtocol}//${location.host}/Verposter/ws/rooms/${roomId}`;
 
-<!--</body>-->
-<!--</html>-->
+    const socket = new WebSocket(wsBase);
+    const voteSocket = new WebSocket(`${wsBase}/vote`);
+
+    socket.onopen = () => {
+        console.log("verbunden")
+    }
+    socket.onmessage = (event) => {
+        if (event.data.startsWith("CARD:")) {
+            document.getElementById("word").textContent = event.data.substring(5);
+        }
+
+        if (event.data.startsWith("CHAT:")) {
+            const chat = document.getElementById("chat");
+            chat.value = event.data.substring(5) + "\n" + chat.value;
+            chat.scrollTop = 0;
+        }
+    }
+
+    function send(){
+        const input = document.getElementById("message");
+        const message = input.value.trim();
+
+        if (message === "") {
+            return;
+        }
+
+        socket.send(message);
+        input.value = "";
+    }
+
+    document.getElementById("message").addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            send();
+        }
+    });
+    socket.onclose = () => {
+        console.log("geschlossen");
+    }
+
+    let remaining = 0;
+    let countdown = null;
+
+    function showTime() {
+        const minutes = Math.floor(remaining / 60);
+        const seconds = remaining % 60;
+        document.getElementById("timer").textContent = `${minutes}:${String(seconds).padStart(2, "0")}`;
+    }
+
+    // Anzeige des Timers ist bisschen kacke weil es ist eigentlich serverseitig
+    function startCountdown(seconds) {
+        remaining = seconds;
+        showTime();
+        clearInterval(countdown);
+        countdown = setInterval(() => {
+            remaining--;
+            if (remaining <= 0) {
+                remaining = 0;
+                clearInterval(countdown);
+            }
+            showTime();
+        }, 1000);
+    }
+
+    voteSocket.onmessage = (event) => {
+        if (event.data.startsWith("TIME:")) {
+            startCountdown(Number(event.data.substring(5)));
+        }
+
+        if (event.data.startsWith("REVEAL:")) {
+            clearInterval(countdown);
+            document.getElementById("timer").textContent = "vorbei";
+            document.getElementById("reveal").textContent = event.data.substring(7);
+            document.getElementById("vote-buttons").innerHTML = "";
+            document.getElementById("lobby-button").style.display = "";
+        }
+    }
+
+    document.getElementById("lobby-button").addEventListener("click", async function () {
+        const resp = await fetch(`api/rooms/${roomId}/members/leave`, {
+            method: "DELETE"
+        });
+        if (!resp.ok) {
+            return;
+        }
+        window.location.href = "lobby";
+    });
+
+    async function getVoteButtons() {
+        const resp = await fetch(`api/rooms/${roomId}/members`);
+        const members = await resp.json();
+
+        const container = document.getElementById("vote-buttons");
+        container.innerHTML = "";
+        for (const member of members) {
+            const button = document.createElement("button");
+            button.type = "button";
+            button.textContent = member.name;
+            button.addEventListener("click", () => {
+                voteSocket.send(String(member.id));
+                document.getElementById("reveal").textContent = "Stimme abgegeben, warte auf die anderen";
+            });
+            if (container.hasChildNodes()) {
+                container.append("    ");
+            }
+            container.append(button);
+        }
+    }
+
+    getVoteButtons();
+</script>
+</body>
+</html>

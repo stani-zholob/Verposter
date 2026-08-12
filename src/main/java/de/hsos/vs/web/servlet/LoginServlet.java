@@ -1,9 +1,8 @@
 package de.hsos.vs.web.servlet;
 
 import com.google.gson.Gson;
-import de.hsos.vs.web.entities.User;
-import de.hsos.vs.web.entities.Member;
-import de.hsos.vs.wordservice.db.UserDAO;
+import de.hsos.vs.entities.User;
+import de.hsos.vs.database.UserDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,9 +14,10 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 /**
+ * todo doku
+ *
  * @author Stanislav
  */
-
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
     UserDAO userDAO = new UserDAO();
@@ -50,6 +50,7 @@ public class LoginServlet extends HttpServlet {
         //wir pruefen ob die Daten Nullen sind
         if (newUser.getName() == null || newUser.getPassword() == null) {
             resp.sendRedirect(req.getContextPath() + "/login.html");
+            return;
         }
 
         //test ausgabe
@@ -58,47 +59,23 @@ public class LoginServlet extends HttpServlet {
 
         try {
             // in einer Datenbank suchen also ein Objekt aus einer Datebank
-            User user = userDAO.findByName(newUser.getName()).orElse(null);
-            Member member = new Member(user.getId(), user.getName());
-
-
-            //falls es nicht in der Tabelle oder den Passwort nicht stimmt, dann redirect zurück
-            if (!newUser.getPassword().equals(user.getPassword())) {
-                resp.sendRedirect(req.getContextPath() + "/login.html");
+            User user = userDAO.findByName(userFromJson.getName()).orElse(null);
+            if (user == null || !user.getPassword().equals(userFromJson.getPassword())) {
+                resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+                return;
             }
-
-            //neue Session erzeuen
             HttpSession session = req.getSession();
-            session.setAttribute("userId", member.getId());
-            session.setAttribute("username", member.getName());
-            session.setAttribute("ready", member.isReady());
+            session.setAttribute("userId", user.getId());
+            session.setAttribute("username", user.getName());
+            session.setAttribute("ready", false);
+            resp.setStatus(HttpServletResponse.SC_OK);
 
             //redirect weiter
             resp.sendRedirect(req.getContextPath() + "/lobby");
 
 
         } catch (SQLException e) {
-
             throw new RuntimeException(e);
         }
-
-
-        /*
-
-        if ("chef".equals(username) && "123".equals(password)) {
-
-            HttpSession session = req.getSession();
-            session.setAttribute("userId", user.getId);
-            session.setAttribute("username", username);
-            resp.sendRedirect(req.getContextPath() + "/lobby");
-
-        }
-        else {
-            PrintWriter out = resp.getWriter();
-            out.println("Wrong Password");
-            resp.sendRedirect(req.getContextPath() + "/login");
-        }
-
-         */
     }
 }

@@ -1,6 +1,6 @@
-package de.hsos.vs.wordservice.db;
+package de.hsos.vs.database;
 
-import de.hsos.vs.web.entities.Word;
+import de.hsos.vs.entities.Word;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,12 +11,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Datenbankzugriff auf die Tabelle words.
+ *
+ * @author Lukas
+ */
 public class WordDAO {
     public Word insert(int topicId, String word, String tip) throws SQLException {
         String sql = "INSERT INTO words(topicId, word, tip) VALUES(?, ?, ?)";
 
         try (Connection conn = Database.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, topicId);
             pstmt.setString(2, word);

@@ -2,9 +2,9 @@ package de.hsos.vs.web.servlet;
 
 
 import com.google.gson.Gson;
-import de.hsos.vs.web.entities.Lobby;
-import de.hsos.vs.web.entities.Member;
-import de.hsos.vs.web.entities.Room;
+import de.hsos.vs.entities.Lobby;
+import de.hsos.vs.entities.Member;
+import de.hsos.vs.entities.Room;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,47 +15,34 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * @author Stanislav
- */
 @WebServlet("/api/rooms/*")
 public class RoomServlet extends HttpServlet {
     private final Lobby lobby = new Lobby();
 
-    @Override
-    public void init() throws ServletException {
 
-    }
-
+    /**
+     * todo doku
+     *
+     * @author Stanislav
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String[] pathParts = getPathParts(req);
 
-
+        // GET /api/rooms
         if (pathParts.length == 0) {
-
-        resp.setContentType("application/json");
-        Gson gson = new Gson();
-
-        int roomId = getRoomIndex(req);
-        if  (roomId == -1) {
-            resp.getWriter().write(gson.toJson(lobby.getRooms()));
+            resp.setContentType("application/json;charset=UTF-8");
+            resp.getWriter().write(new Gson().toJson(lobby.getRooms()));
             return;
         }
 
-        Room foundRoom = lobby.getRoomById(roomId);
-        resp.getWriter().write(gson.toJson(foundRoom));
-        }
-
-        // /api/rooms/1
+        // GET /api/rooms/1
         if (pathParts.length == 1) {
-            resp.setContentType("application/json");
-            Gson gson = new Gson();
+            int roomId = Integer.parseInt(pathParts[0]);
 
-            int roomId = getRoomIndex(req);
-            Room currentRoom = lobby.getRoomById(roomId);
-            resp.getWriter().write(gson.toJson(currentRoom));
-            System.out.println(currentRoom);
+            resp.setContentType("application/json;charset=UTF-8");
+            resp.getWriter().write(new Gson().toJson(lobby.getRoomById(roomId)));
+            return;
         }
 
         // /api/rooms/1/members
@@ -75,7 +62,7 @@ public class RoomServlet extends HttpServlet {
             }
             List<Member> members = currentRoom.getMembers();
 
-            resp.setContentType("application/json");
+            resp.setContentType("application/json;charset=UTF-8");
             resp.getWriter().write(new Gson().toJson(members));
             resp.setStatus(HttpServletResponse.SC_OK);
         }
@@ -115,20 +102,22 @@ public class RoomServlet extends HttpServlet {
             Room room = lobby.getRoomById(roomId);
 
             if (room.getMemberById(userId) != null) {
-                System.out.println("Benutzer ist bereits im Raum");
-                resp.sendRedirect("/Verposter/gamestart?roomId=" + roomId);
+                resp.sendRedirect(req.getContextPath() + "/gamestart?roomId=" + roomId);
                 return;
             }
 
             room.addMember(new Member(userId, username));
             session.setAttribute("roomId", roomId);
 
-            System.out.println("RoomId is " + roomId + "  UserID is " + userId);
-
-            resp.sendRedirect("/Verposter/gamestart?roomId=" + roomId);
+            resp.sendRedirect(req.getContextPath() + "/gamestart?roomId=" + roomId);
         }
     }
 
+    /**
+     * todo doku
+     *
+     * @author Lukas
+     */
     @Override
     protected void doPatch(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String[] pathParts = getPathParts(req);
@@ -150,11 +139,17 @@ public class RoomServlet extends HttpServlet {
 
             session.setAttribute("ready", member.isReady());
 
+            resp.setContentType("application/json;charset=UTF-8");
             resp.setStatus(HttpServletResponse.SC_OK);
             resp.getWriter().write(new Gson().toJson(room.getMembers()));
         }
     }
 
+    /**
+     * todo doku
+     *
+     * @author Lukas
+     */
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String[] pathParts = getPathParts(req);
@@ -178,21 +173,8 @@ public class RoomServlet extends HttpServlet {
         }
     }
 
-    private int getRoomIndex(HttpServletRequest request){
-        String pathLine = request.getPathInfo(); // da liegt jetzt /42
-        if (pathLine == null || pathLine.equals("/")) return -1; //  falls /api/users oder /api/users/
-
-        try {
-            String numberString = pathLine.replace("/", "");
-            return Integer.parseInt(numberString);
-        }catch (Exception e){
-            e.printStackTrace();
-            return -1;
-        }
-    }
-
     /**
-     * Stanislav
+     * @author Stanislav
      * req.getPathInfo() gibt /1/members fuer /api/rooms/1/members
      */
     private String[] getPathParts(HttpServletRequest req){

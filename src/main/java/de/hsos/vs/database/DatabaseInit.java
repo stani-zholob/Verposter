@@ -1,23 +1,16 @@
-package de.hsos.vs.wordservice;
+package de.hsos.vs.database;
 
-import de.hsos.vs.web.entities.Topic;
-import de.hsos.vs.web.entities.Word;
-
-
-import de.hsos.vs.wordservice.db.Database;
-import de.hsos.vs.wordservice.db.TopicDAO;
-import de.hsos.vs.wordservice.db.UserDAO;
-import de.hsos.vs.wordservice.db.WordDAO;
-//import de.hsos.vs.wordservice.db.WordDAO;
+import de.hsos.vs.entities.Topic;
 
 import java.sql.SQLException;
-import java.util.List;
 
 /**
- * Legt das Schema an und befuellt es einmalig mit Beispieldaten.
- * Einmal per Hand starten, danach steht db/verposter.db bereit.
+ * Legt das Schema an und befüllt es einmalig mit Beispieldaten.
+ * Einmal vor dem ersten Starten der Andwendung starten
+ *
+ * @author Lukas
  */
-public class ServiceMain {
+public class DatabaseInit {
 
     public static void main(String[] args) throws SQLException {
         Database.init();
@@ -64,7 +57,7 @@ public class ServiceMain {
             wordDAO.insert(berufe.getId(), "Bäcker", "Fängt mitten in der Nacht an");
             wordDAO.insert(berufe.getId(), "Feuerwehrmann", "Kommt mit Blaulicht");
 
-            //Erste Anmeldedaten
+            //  Erste Anmeldedaten
             userDAO.insert("admin", "admin");
             userDAO.insert("lukkas", "lukkas");
             userDAO.insert("stani", "stani");

@@ -1,23 +1,27 @@
-package de.hsos.vs.wordservice.db;
+package de.hsos.vs.database;
 
-import de.hsos.vs.web.entities.User;
+import de.hsos.vs.entities.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Optional;
 
+/**
+ * Datenbankzugriff auf die Tabelle users, wird für Anmeldung
+ * und Registrierung benutzt.
+ *
+ * @author Lukas
+ */
 public class UserDAO {
 
-    /** Legt einen Benutzer an und gibt ihn mit der vergebenen id zurueck. */
     public User insert(String name, String password) throws SQLException {
         String sql = "INSERT INTO users(name, password) VALUES(?, ?)";
 
         try (Connection conn = Database.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, name);
             pstmt.setString(2, password);
@@ -31,9 +35,9 @@ public class UserDAO {
                 }
             }
         }
-        throw new SQLException("Could not retrieve generated user ID");
+        throw new SQLException("Fehler mit User ID");
     }
-    /** Fuer den Login: Benutzer per Name suchen. */
+
     public Optional<User> findByName(String name) throws SQLException {
         String sql = "SELECT id, name, password FROM users WHERE name = ?";
 
@@ -64,8 +68,6 @@ public class UserDAO {
                 return Optional.empty();
             }
         }
-    //public ArrayList<User> findAll() throws SQLException {
-
     }
 
     private User map(ResultSet rs) throws SQLException {

@@ -1,4 +1,4 @@
-package de.hsos.vs.wordservice.db;
+package de.hsos.vs.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,7 +6,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * Zentraler Zugriff auf die SQLite-Datenbank
+ * Zentraler Zugriff auf die SQLite-Datenbank und Anlegen der Tabellen.
+ *
+ * @author Lukas
  */
 public class Database {
 
@@ -15,11 +17,15 @@ public class Database {
 
     private Database() {
     }
+
+    // Der Treiber liegt in WEB-INF/lib. Der DriverManager sucht seine Treiber
+    // nur einmal beim Start, deshalb muss er hier von Hand geladen werden -
+    // sonst kommt zur Laufzeit "No suitable driver found for jdbc:sqlite".
     static {
         try {
             Class.forName("org.sqlite.JDBC");
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException("SQLite JDBC driver not found", e);
+            throw new RuntimeException("SQLite Treiber nicht gefunden", e);
         }
     }
 
@@ -61,8 +67,6 @@ public class Database {
                         tip     VARCHAR(255),
                         FOREIGN KEY (topicId) REFERENCES topics(id) ON DELETE CASCADE
                     )""");
-
-            stmt.execute("CREATE INDEX IF NOT EXISTS idx_words_topic ON words(topicId)");
         }
     }
 }

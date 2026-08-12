@@ -9,6 +9,11 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+/**
+ * todo doku
+ *
+ * @author Stanislav
+ */
 @WebServlet("/gamestart")
 public class GameStartServlet extends HttpServlet {
     @Override
@@ -18,7 +23,7 @@ public class GameStartServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/login");
             return;
         }
-        req.getRequestDispatcher("/gamestart.html").forward(req, resp);
+        req.getRequestDispatcher("/room.html").forward(req, resp);
     }
 
     @Override

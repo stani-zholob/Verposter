@@ -1,4 +1,4 @@
-package de.hsos.vs.web.entities;
+package de.hsos.vs.entities;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,12 +7,13 @@ import java.util.Map;
 
 /**
  * Einfache Entität für den Raum
- * @author Lukas
+ *
+ * @author Lukas, Stanislav
  */
 public class Room {
-    private int id;
-    private String name;
-    private Map<Integer, Member> membersByUserId;
+    private final int id;
+    private final String name;
+    private final Map<Integer, Member> membersByUserId;
 
     public Room(int id, String name) {
         this.id = id;
@@ -40,18 +41,7 @@ public class Room {
         return name;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public List<Member> getMembers() {
         return new ArrayList<>(membersByUserId.values());
-    }
-
-    public void setUser(List<Member> members) {
-        this.membersByUserId = new HashMap<>();
-        for (Member member : members) {
-            addMember(member);
-        }
     }
 }

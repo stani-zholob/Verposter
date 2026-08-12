@@ -1,10 +1,8 @@
 package de.hsos.vs.web.servlet;
 
 import com.google.gson.Gson;
-//import de.hsos.vs.entities.UserServlet;
-import de.hsos.vs.web.entities.User;
-//import de.hsos.vs.wordservice.db.UserDAO;
-import de.hsos.vs.wordservice.db.UserDAO;
+import de.hsos.vs.entities.User;
+import de.hsos.vs.database.UserDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,8 +12,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * todo doku
+ *
+ * @author Stanislav
+ */
 @WebServlet("/register")
-public class RegsiterServlet extends HttpServlet {
+public class RegisterServlet extends HttpServlet {
 
 
     UserDAO userDAO = new UserDAO();

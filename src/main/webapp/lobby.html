@@ -1,4 +1,4 @@
-<!-- Author: Stanislav -->
+<!-- Author: Stanislav, Lukas -->
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -10,7 +10,7 @@
 <h1>VERPOSTER</h1>
 <h2>Lobby</h2>
 
-<form action = "/Verposter/createroom" method = "get">
+<form action = "createroom" method = "get">
     <p><button type="submit">+ Neuer Raum</button></p></form>
 
 
@@ -27,15 +27,13 @@
 
     </tbody>
 </table>
-<form action="/Verposter/logout" method="get">
+<form action="logout" method="get">
 <br> <button>Ausloggen</button>
 </form>
 <script>
     async function getRooms(){
-        const resp = await fetch('/Verposter/api/rooms');
+        const resp = await fetch('api/rooms');
         const rooms = await resp.json();
-        console.log(rooms);
-
 
         const table = document.getElementById("rooms-table");
         table.innerHTML = "";
@@ -45,7 +43,7 @@
                 <td>${room.id}</td>
                 <td>${room.name}</td>
                 <td>
-                        <form action="/Verposter/api/rooms/${room.id}/members" method="post">
+                        <form action="api/rooms/${room.id}/members" method="post">
                             <button type="submit"> Beitreten </button>
                     </form>
                 </td> `;

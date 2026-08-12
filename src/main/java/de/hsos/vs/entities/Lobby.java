@@ -1,4 +1,4 @@
-package de.hsos.vs.web.entities;
+package de.hsos.vs.entities;
 
 import java.util.ArrayList;
 import java.util.HashMap;

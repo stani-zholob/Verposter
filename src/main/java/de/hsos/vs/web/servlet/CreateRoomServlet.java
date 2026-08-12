@@ -8,6 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+/**
+ * todo doku
+ *
+ * @author Stanislav
+ */
 @WebServlet("/createroom")
 public class CreateRoomServlet extends HttpServlet {
     @Override

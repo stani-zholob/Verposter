@@ -1,5 +1,4 @@
-
-<!-- Author: Stanislav -->
+<!-- Author: Lukas -->
 
 <!DOCTYPE html>
 
@@ -49,9 +48,8 @@
     const ROOM_ID = new URLSearchParams(window.location.search).get("roomId");
 
     async function getMembers(){
-        const resp = await fetch(`/Verposter/api/rooms/${ROOM_ID}/members`);
+        const resp = await fetch(`api/rooms/${ROOM_ID}/members`);
         const members = await resp.json();
-        console.log(members);
 
         const table = document.getElementById("users-table");
         table.innerHTML = "";
@@ -64,13 +62,13 @@
             table.append(row);
         }
 
-        if (members.length > 0 && members.every(m => m.ready)) {
-            window.location.href = `/Verposter/showcard.html?roomId=${ROOM_ID}`;
+        if (members.length >= 3 && members.every(m => m.ready)) {
+            window.location.href = `game.html?roomId=${ROOM_ID}`;
         }
     }
 
     document.getElementById("ready-button").addEventListener("click", async function () {
-        const resp = await fetch(`/Verposter/api/rooms/${ROOM_ID}/members/ready`, {
+        const resp = await fetch(`api/rooms/${ROOM_ID}/members/ready`, {
             method: "PATCH"
         });
         if (!resp.ok) {
@@ -80,19 +78,18 @@
     });
 
     document.getElementById("leave-button").addEventListener("click", async function () {
-        const resp = await fetch(`/Verposter/api/rooms/${ROOM_ID}/members/leave`, {
+        const resp = await fetch(`api/rooms/${ROOM_ID}/members/leave`, {
             method: "DELETE"
         });
         if (!resp.ok) {
             return;
         }
-        window.location.href = "/Verposter/lobby";
+        window.location.href = "lobby";
     });
 
     async function getTopics(){
-        const resp = await fetch(`/Verposter/api/topics`);
+        const resp = await fetch(`api/topics`);
         const topics = await resp.json();
-        console.log(topics);
 
         const table = document.getElementById("topics-table");
         table.innerHTML = "";

@@ -11,7 +11,7 @@
 <h1>VERPOSTER</h1>
 
 <h2>Registrieren</h2>
-<form id="reg-form" action = "/Verposter/register" method = "post">
+<form id="reg-form" action = "register" method = "post">
 
     <label for="username">Benutzername</label><br>
     <input type="text" id="username" name="username" maxlength="20"><br>
@@ -20,7 +20,7 @@
     <input type="password" id="password" name="password" maxlength="20"><br><br>
 
     <button>Registrieren</button>&nbsp;&nbsp;
-    <button type="button" onclick="location.href='/Verposter/login'"> Zur Anmeldung </button>
+    <button type="button" onclick="location.href='login'"> Zur Anmeldung </button>
 </form>
 
     <script>
@@ -32,7 +32,7 @@
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
 
-            const response = await fetch("/Verposter/register", {
+            const response = await fetch("register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -45,7 +45,7 @@
             });
 
             if (response.ok) {
-                window.location.href = "/Verposter/login"
+                window.location.href = "login"
             } else if (response.status === 409) {
                 alert("Der Benutzername ist bereits vergeben");
             } else if (response.status === 401) {

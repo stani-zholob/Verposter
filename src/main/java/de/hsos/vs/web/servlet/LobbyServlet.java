@@ -11,6 +11,8 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
+ * todo doku
+ *
  * @author Stanislav
  */
 @WebServlet("/lobby")

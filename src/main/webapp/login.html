@@ -11,7 +11,7 @@
 <h1>VERPOSTER</h1>
 
 <h2>Anmelden</h2>
-<form id="login-form" action = "/Verposter/login" method = "post">
+<form id="login-form" action = "login" method = "post">
     <label for="username">Benutzername</label><br>
     <input type="text" id="username" name="username" maxlength="20"required><br>
 
@@ -19,7 +19,7 @@
     <input type="password" id="password" name="password" maxlength="20" required><br><br>
 
     <button> Anmelden </button>&nbsp;&nbsp;
-    <button type="button" onclick="location.href='/Verposter/register'"> Zur Registrierung </button>
+    <button type="button" onclick="location.href='register'"> Zur Registrierung </button>
 </form>
 
 <script>
@@ -31,7 +31,7 @@
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
 
-        const resp = await fetch("/Verposter/login", {
+        const resp = await fetch("login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -44,7 +44,7 @@
         });
 
         if (resp.ok) {
-            window.location.href = "/Verposter/lobby";
+            window.location.href = "lobby";
         } else if (resp.status === 401) {
             alert("Falscher Benutzername oder Passwort");
         } else {

@@ -1,5 +1,10 @@
-package de.hsos.vs.web.entities;
+package de.hsos.vs.entities;
 
+/**
+ * Member ist ein User der in einem Raum ist
+ *
+ * @author Stanislav
+ */
 public class Member {
     private int id;
     private String name;
@@ -13,14 +18,8 @@ public class Member {
     public int getId() {
         return id;
     }
-    public void setId(int id) {
-        this.id = id;
-    }
     public String getName() {
         return name;
-    }
-    public void setName(String name) {
-        this.name = name;
     }
     public boolean isReady() {
         return ready;

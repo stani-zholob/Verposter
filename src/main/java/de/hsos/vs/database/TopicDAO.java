@@ -1,6 +1,6 @@
-package de.hsos.vs.wordservice.db;
+package de.hsos.vs.database;
 
-import de.hsos.vs.web.entities.Topic;
+import de.hsos.vs.entities.Topic;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,6 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Datenbankzugriff auf die Tabelle topics.
+ *
+ * @author Lukas
+ */
 public class TopicDAO {
 
     public Topic insert(String name) throws SQLException {
@@ -34,7 +39,6 @@ public class TopicDAO {
     }
 
     /** Alle Themen - z.B. fuer die Auswahl beim Spielstart. */
-
     public List<Topic> findAll() throws SQLException {
         String sql = "SELECT id, name FROM topics ORDER BY name";
         List<Topic> topics = new ArrayList<>();
