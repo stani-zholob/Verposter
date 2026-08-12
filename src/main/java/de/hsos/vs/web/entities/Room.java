@@ -1,7 +1,9 @@
 package de.hsos.vs.web.entities;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Einfache Entität für den Raum
@@ -10,20 +12,24 @@ import java.util.List;
 public class Room {
     private int id;
     private String name;
-    private List<Member> members;
+    private Map<Integer, Member> membersByUserId;
 
     public Room(int id, String name) {
         this.id = id;
         this.name = name;
-        this.members = new ArrayList<>();
+        this.membersByUserId = new HashMap<>();
     }
 
     public void addMember(Member member) {
-        this.members.add(member);
+        this.membersByUserId.put(member.getId(), member);
     }
 
     public void removeMember(Member member) {
-        this.members.remove(member);
+        this.membersByUserId.remove(member.getId());
+    }
+
+    public Member getMemberById(int userId) {
+        return membersByUserId.get(userId);
     }
 
     public int getId() {
@@ -39,10 +45,13 @@ public class Room {
     }
 
     public List<Member> getMembers() {
-        return members;
+        return new ArrayList<>(membersByUserId.values());
     }
 
     public void setUser(List<Member> members) {
-        this.members = members;
+        this.membersByUserId = new HashMap<>();
+        for (Member member : members) {
+            addMember(member);
+        }
     }
 }

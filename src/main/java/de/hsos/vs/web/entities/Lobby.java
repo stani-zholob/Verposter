@@ -1,24 +1,28 @@
 package de.hsos.vs.web.entities;
 
-import de.hsos.vs.wordservice.db.UserDAO;
-
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 /**
  * @author Stanislav
  */
 public class Lobby {
-    ArrayList<Room> rooms = new ArrayList<>();
+    private final Map<Integer, Room> roomsById = new HashMap<>();
+    private int nextRoomId = 1;
 
     public Room getRoomById(int id) {
-        for (Room room : rooms) {
-            if (room.getId() == id) {
-                return room;
-            }
-        }
-        return null;
+        return roomsById.get(id);
     }
 
-    public ArrayList<Room> getRooms(){
-        return rooms;
+    public List<Room> getRooms() {
+        return new ArrayList<>(roomsById.values());
+    }
+
+    public Room createRoom(String name) {
+        Room room = new Room(nextRoomId, name);
+        nextRoomId++;
+        roomsById.put(room.getId(), room);
+        return room;
     }
 }

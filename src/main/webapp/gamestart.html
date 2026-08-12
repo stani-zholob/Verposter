@@ -64,8 +64,8 @@
             table.append(row);
         }
 
-        if (members.length > 2 && members.every(m => m.ready)) {
-            window.location.href = "/Verposter/showcard.html";
+        if (members.length > 0 && members.every(m => m.ready)) {
+            window.location.href = `/Verposter/showcard.html?roomId=${ROOM_ID}`;
         }
     }
 

@@ -12,7 +12,8 @@
 <h2 id="word"> </h2>
 
 <script>
-    const socket = new WebSocket("ws://localhost:8080/Verposter/ws");
+    const roomId = new URLSearchParams(window.location.search).get("roomId")
+    const socket = new WebSocket(`ws://localhost:8080/Verposter/ws/rooms/${roomId}`);
 
     socket.onopen = () => {
         console.log("verbunden")

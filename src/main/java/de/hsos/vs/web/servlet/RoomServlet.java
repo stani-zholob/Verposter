@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,8 +20,7 @@ import java.util.List;
  */
 @WebServlet("/api/rooms/*")
 public class RoomServlet extends HttpServlet {
-    Lobby lobby = new Lobby();
-    ArrayList<Room> rooms = lobby.getRooms();
+    private final Lobby lobby = new Lobby();
 
     @Override
     public void init() throws ServletException {
@@ -41,17 +39,11 @@ public class RoomServlet extends HttpServlet {
 
         int roomId = getRoomIndex(req);
         if  (roomId == -1) {
-            resp.getWriter().write((gson.toJson(rooms)));
+            resp.getWriter().write(gson.toJson(lobby.getRooms()));
             return;
         }
 
-        Room foundRoom = null;
-        for (Room room : rooms) {
-            if (room.getId() == roomId) {
-                foundRoom = room;
-                break;
-            }
-        }
+        Room foundRoom = lobby.getRoomById(roomId);
         resp.getWriter().write(gson.toJson(foundRoom));
         }
 
@@ -103,8 +95,7 @@ public class RoomServlet extends HttpServlet {
             Gson gson = new Gson();
             resp.setContentType("application/json");
             Room roomFromJson = gson.fromJson(req.getReader(), Room.class);
-            Room newRoom = new Room(rooms.size() + 1, roomFromJson.getName());
-            rooms.add(newRoom);
+            Room newRoom = lobby.createRoom(roomFromJson.getName());
             resp.setStatus(HttpServletResponse.SC_CREATED);
             resp.setHeader("Location", req.getContextPath() + "/api/rooms/" + newRoom.getId());
         }
@@ -123,12 +114,10 @@ public class RoomServlet extends HttpServlet {
 
             Room room = lobby.getRoomById(roomId);
 
-            for (Member m : room.getMembers()) {
-                if (m.getId() == userId) {
-                    System.out.println("Benutzer ist bereits im Raum");
-                    resp.sendRedirect("/Verposter/gamestart?roomId=" + roomId);
-                    return;
-                }
+            if (room.getMemberById(userId) != null) {
+                System.out.println("Benutzer ist bereits im Raum");
+                resp.sendRedirect("/Verposter/gamestart?roomId=" + roomId);
+                return;
             }
 
             room.addMember(new Member(userId, username));
@@ -154,13 +143,7 @@ public class RoomServlet extends HttpServlet {
 
             Room room = lobby.getRoomById(roomId);
             if (room == null) return;
-            Member member = null;
-            for (Member m : room.getMembers()) {
-                if (m.getId() == userId) {
-                    member = m;
-                    break;
-                }
-            }
+            Member member = room.getMemberById(userId);
 
             if (member == null) return;
             member.setReady(!member.isReady());
@@ -186,13 +169,7 @@ public class RoomServlet extends HttpServlet {
 
             Room room = lobby.getRoomById(roomId);
             if (room == null) return;
-            Member member = null;
-            for (Member m : room.getMembers()) {
-                if (m.getId() == userId) {
-                    member = m;
-                    break;
-                }
-            }
+            Member member = room.getMemberById(userId);
 
             if (member == null) return;
 
