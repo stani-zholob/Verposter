@@ -132,8 +132,9 @@ public class RoomServlet extends HttpServlet {
             }
 
             room.addMember(new Member(userId, username));
+            session.setAttribute("roomId", roomId);
 
-            System.out.println(roomId + " " + userId);
+            System.out.println("RoomId is " + roomId + "  UserID is " + userId);
 
             resp.sendRedirect("/Verposter/gamestart?roomId=" + roomId);
         }
