@@ -97,12 +97,28 @@ public class Game {
         } else {
             text = currentWord.getWord();
         }
-        session.getAsyncRemote().sendText(text);
+        session.getAsyncRemote().sendText("CARD:" + text);
     }
 
     @OnMessage
     public void onMessage(String message, Session sender) {
-        //los stani ab gehts weiter mit chat jetzt
+        Integer roomId = (Integer) sender.getUserProperties().get("roomId");
+        String username = (String) sender.getUserProperties().get("username");
+
+        if (roomId == null || username == null || message.isBlank()) {
+            return;
+        }
+
+        GameRoom gameRoom = gameRooms.get(roomId);
+        if (gameRoom == null) {
+            return;
+        }
+
+        String chatMessage = "CHAT:" + username + ": " + message;
+
+        for (Session player : gameRoom.getPlayers().values()) {
+            player.getAsyncRemote().sendText(chatMessage);
+        }
     }
 
     @OnClose

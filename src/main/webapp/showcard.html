@@ -11,6 +11,11 @@
 <p>Das Wort ist</p>
 <h2 id="word"> </h2>
 
+
+<input id="message" type="text" placeholder="Schreibe eine Nachricht">
+<button onclick="send()">Senden</button>
+<div id="chat"></div>
+
 <script>
     const roomId = new URLSearchParams(window.location.search).get("roomId")
     const socket = new WebSocket(`ws://localhost:8080/Verposter/ws/rooms/${roomId}`);
@@ -19,7 +24,27 @@
         console.log("verbunden")
     }
     socket.onmessage = (event) => {
-        document.getElementById("word").textContent = event.data;
+        if (event.data.startsWith("CARD:")) {
+            document.getElementById("word").textContent = event.data.substring(5);
+        }
+
+        if (event.data.startsWith("CHAT:")) {
+            const message = document.createElement("p");
+            message.textContent = event.data.substring(5);
+            document.getElementById("chat").append(message);
+        }
+    }
+
+    function send(){
+        const input = document.getElementById("message");
+        const message = input.value.trim();
+
+        if (message === "") {
+            return;
+        }
+
+        socket.send(message);
+        input.value = "";
     }
     socket.onclose = () => {
         console.log("geschlossen");
