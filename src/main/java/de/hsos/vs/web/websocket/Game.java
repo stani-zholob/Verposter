@@ -69,7 +69,8 @@ public class Game {
     }
 
     /**
-     * todo doku
+     * Wählt einen Verposter aus. Dafür wird die Liste der Player im Raum geholt und einer von diesen zufällig ausgewählt
+     * @return userId des Verposters
      *
      * @author Lukas
      */
@@ -81,7 +82,8 @@ public class Game {
     }
 
     /**
-     * todo doku
+     * Wählt zufällig ein Topic aus. Wählt zufällig ein Wort aus diesem Topic aus
+     * @return Word wo Wort und Hinweis drin steht
      *
      * @author Lukas
      */
@@ -92,7 +94,7 @@ public class Game {
     }
 
     /**
-     * todo doku
+     * zeigt jedem Nutzer (Session) das Wort dieses Spiels an oder zeigt ihm an das er der Verposter ist
      *
      * @author Lukas
      */
@@ -109,6 +111,7 @@ public class Game {
         } else {
             text = currentWord.getWord();
         }
+        //AsyncRemote macht das Aufruf wartet nicht auf Ankommen der Nachricht
         session.getAsyncRemote().sendText("CARD:" + text);
     }
 

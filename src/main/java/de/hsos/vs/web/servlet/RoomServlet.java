@@ -113,7 +113,8 @@ public class RoomServlet extends HttpServlet {
     }
 
     /**
-     * todo doku
+     * schaltet den bereit-status des members um. das passiert mit patch weil das ist wie update bei CRUD
+     * gibt eine ganze json zurück wo das bereit flag aktualisiert wurde
      *
      * @author Lukas
      */
@@ -145,7 +146,7 @@ public class RoomServlet extends HttpServlet {
     }
 
     /**
-     * todo doku
+     * wird aufgerufen wenn verlassen button geklickt wird und holt userId um ihn aus dem Raum zu entfernen
      *
      * @author Lukas
      */
