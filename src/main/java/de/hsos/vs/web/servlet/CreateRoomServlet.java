@@ -9,7 +9,9 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 /**
- * todo doku
+ * Dieser Servlet macht ausschliesslich den Redirect auf die html Seite durch GET createroom.html
+ * WEnn die Session nicht existiert, wird Redirect auf den /login Servlet durchgefuehrt
+ * Das funktioniert über ServletFilter (hat das Priorität)
  *
  * @author Stanislav
  */

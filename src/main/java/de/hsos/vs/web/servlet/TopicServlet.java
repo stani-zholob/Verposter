@@ -11,8 +11,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 /**
- * todo doku
- *
+ * ein REST Endpoit zum Abrufen der Themen. Die Themen werden aus einer Datenbank gezogen und als JSON mit GET zurueckgegebn
  * @author Stanislav
  */
 @WebServlet("/api/topics/*")

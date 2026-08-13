@@ -9,6 +9,10 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
+ * Quelle: Oechsle 2022 - Parallele und verteilte anwendungen in java s.445
+ * Zugriffskontrolle
+ * "Ein Filter kann allerdings auch die Ausführung der weiteren Filter und damit auch des eigentlichen
+ * Servlets unterbinden. " bei dem Projekt wird es manchmal auf /login redirected statt UNAUTHORIZED abzusenden.
  *
  * @author Stanislav
  */

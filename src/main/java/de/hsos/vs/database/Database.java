@@ -18,7 +18,7 @@ public class Database {
     private Database() {
     }
 
-    // Der Treiber liegt in WEB-INF/lib. Der DriverManager sucht seine Treiber
+    // Der DriverManager sucht seine Treiber
     // nur einmal beim Start, deshalb muss er hier von Hand geladen werden -
     // sonst kommt zur Laufzeit "No suitable driver found for jdbc:sqlite".
     static {

@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 /**
- * todo doku
+ * Verwaltet die Registrierung neuer Nutzer
+ * Falls der Name in einer Datenbank nicht existiert, wird der neue Nutzer mithilfe von userDAO gesprichert (insert)
+ * Daten werden als JSON gesendet
  *
  * @author Stanislav
  */

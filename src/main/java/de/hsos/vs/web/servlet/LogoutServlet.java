@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * todo doku
+ * Der Servlet meldet den aktullen Nutzer ab. Die Session wird ungueltig und es wird auf /login weitergeleitet
  *
  * @author Stanislav
  */

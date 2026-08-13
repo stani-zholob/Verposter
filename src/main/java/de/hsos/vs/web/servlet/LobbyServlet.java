@@ -11,9 +11,11 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * todo doku
  *
  * @author Stanislav
+ * Dieser Servlet macht ausschliesslich den Redirect auf die html Seite durch GET createroom.html
+ * WEnn die Session nicht existiert, wird Redirect auf den /login Servlet durchgefuehrt
+ * Das funktioniert über ServletFilter (hat das Priorität)
  */
 @WebServlet("/lobby")
 public class LobbyServlet extends HttpServlet {
@@ -27,10 +29,5 @@ public class LobbyServlet extends HttpServlet {
             return;
         }
         req.getRequestDispatcher("/lobby.html").forward(req, resp);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/lobby.html").forward(req, resp);
     }
 }

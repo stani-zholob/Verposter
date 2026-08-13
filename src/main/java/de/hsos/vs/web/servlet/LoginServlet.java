@@ -14,7 +14,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 /**
- * todo doku
+ * Verwaltet die Anmeldung für Nutzern. Die Daten werden als JSON genommen unt mithilf des userDAO ueberprueft
+ * Nach dem erfolgreichen Login werden die UserId und Username und Ready Attribute in HTTP SESSION gespeichert
  *
  * @author Stanislav
  */

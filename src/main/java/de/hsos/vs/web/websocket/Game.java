@@ -23,7 +23,9 @@ public class Game {
     private static final TopicDAO topicDAO = new TopicDAO();
 
     /**
-     * todo doku
+     *  Oeffen einer neuen Websocket. Die HTTP-Session wird mtihilfe von Configurator an Websockets uebergeben, roomId wird von URL geparst
+     *  und die Raumzuordnung geprueft. Danach wird ein Spieler dem Raum hinzugefuegt. Sobald mindestens 3 Spieler verbunden ssind wird ein
+     *  zufaelliges Wort und ein Verposter ausgewaehlt, der Timer gestartet und Spielkarten verteilt
      *
      * @author Stanislav
      */
@@ -116,14 +118,15 @@ public class Game {
     }
 
     /**
-     * todo doku
+     * Verarbeitet eine Nachricht und sendet sie an alle die im Raum sind.
+     * Falls das Wort mit dem Nachricht stimmt, wird das Wort maskiert mit #######
      *
      * @author Stanislav
      */
     @OnMessage
-    public void onMessage(String message, Session sender) {
-        Integer roomId = (Integer) sender.getUserProperties().get("roomId");
-        String username = (String) sender.getUserProperties().get("username");
+    public void onMessage(String message, Session session) {
+        Integer roomId = (Integer) session.getUserProperties().get("roomId");
+        String username = (String) session.getUserProperties().get("username");
 
         if (roomId == null || username == null || message.isBlank()) {
             return;
@@ -145,7 +148,7 @@ public class Game {
     }
 
     /**
-     * todo doku
+     * der Spieler wird aus dem Raum entfernt. Wenn es keine Spieler im Raum mehr gibt, wird  der Raum aus registry geloescht
      *
      * @author Stanislav
      */
@@ -166,7 +169,7 @@ public class Game {
     }
 
     /**
-     * todo doku
+     * Fehlerbehandlung
      *
      * @author Stanislav
      */

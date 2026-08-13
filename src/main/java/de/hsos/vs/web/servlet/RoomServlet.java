@@ -20,8 +20,9 @@ public class RoomServlet extends HttpServlet {
 
 
     /**
-     * todo doku
-     *
+     * Verarbeitung der GET-Anfragen fuer die Raueme. Abhaengig von URL Pfad werden
+     * - alle Raueme - ein bestimmter Raum - die Mitglider eines Raums
+     * als JSON zurueckgegeben. Dafuer muss die Session schon existieren
      * @author Stanislav
      */
     @Override
@@ -69,6 +70,7 @@ public class RoomServlet extends HttpServlet {
 
     /**
      * @author Lukas, Stanislav
+     *
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {

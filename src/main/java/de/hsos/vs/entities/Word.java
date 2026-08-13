@@ -1,7 +1,7 @@
 package de.hsos.vs.entities;
 
 /**
- *
+ * Wort ist das was Spieler am Ende bekommt. Der Player bekommt das Wort, der Imposter bekommt statt das Wort der Hint
  * @author Stanislav
  */
 public class Word {

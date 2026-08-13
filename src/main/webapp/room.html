@@ -53,10 +53,11 @@
 
         const table = document.getElementById("users-table");
         table.innerHTML = "";
+        let index = 1;
         for(const member of members){
             const row = document.createElement("tr");
             row.innerHTML = `
-                <td>${member.id}</td>
+                <td>${index++}</td>
                 <td>${member.name}</td>
                 <td>${member.ready ? "&#10003;" : "&#10007;"}</td>`;
             table.append(row);
@@ -93,10 +94,11 @@
 
         const table = document.getElementById("topics-table");
         table.innerHTML = "";
+        let index = 1;
         for(const topic of topics){
             const row = document.createElement("tr");
             row.innerHTML = `
-                <td>${topic.id}</td>
+                <td>${index++}</td>
                 <td>${topic.name}</td>`;
             table.append(row);
         }
