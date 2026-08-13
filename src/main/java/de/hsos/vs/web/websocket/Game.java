@@ -99,7 +99,7 @@ public class Game {
     private void sendCard(Session session, GameRoom gameRoom) {
         Word currentWord = gameRoom.getCurrentWord();
         Integer userId = (Integer) session.getUserProperties().get("userId");
-        String text;
+        String text;^^
         if (currentWord == null) {
             text = "Kein Wort gefunden";
         } else if (userId != null && userId.equals(gameRoom.getImposterUserId())) {
@@ -172,3 +172,4 @@ public class Game {
         error.printStackTrace();
     }
 }
+ ^

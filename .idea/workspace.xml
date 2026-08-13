@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d7408b15-8a13-452a-9e72-530517c7d91e" name="Changes" comment="Warnungen bearbeitet">
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsos/vs/web/websocket/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsos/vs/web/websocket/Game.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="package-info" />
+        <option value="Class" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Lukkas1&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/stani-zholob/Verposter.git&quot;,
+    &quot;accountId&quot;: &quot;eeefa959-2aaf-4d81-955c-1e54330f77ed&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="3HRoEF3M2ODAxga2bamth7gjFPd" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.DatabaseInit.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ServiceMain.executor&quot;: &quot;Run&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;true&quot;,
+    &quot;Maven.Verposter [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Verposter [verify].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RdControllerToolWindowsLayoutState" isNewUi="true">
+    <layout>
+      <window_info id="Bookmarks" side_tool="true" />
+      <window_info id="Merge Requests" />
+      <window_info id="Backup and Sync History" />
+      <window_info id="Pull Requests" />
+      <window_info id="Learn" show_stripe_button="false" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19036458" />
+      <window_info id="Commit" order="1" weight="0.12871094" />
+      <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Database Changes" />
+      <window_info anchor="bottom" id="TypeScript" />
+      <window_info anchor="bottom" id="Profiler" />
+      <window_info anchor="bottom" id="Build" />
+      <window_info anchor="bottom" id="TODO" />
+      <window_info anchor="bottom" id="File Transfer" />
+      <window_info anchor="bottom" id="Version Control" order="0" weight="0.33020833" />
+      <window_info anchor="bottom" id="Problems" order="1" />
+      <window_info anchor="bottom" id="Problems View" order="2" weight="0.32974288" />
+      <window_info anchor="bottom" id="Terminal" order="3" weight="0.32974288" />
+      <window_info anchor="bottom" id="Services" order="4" />
+      <window_info anchor="bottom" id="Run" order="5" weight="0.32974288" />
+      <window_info anchor="bottom" id="Find" order="6" weight="0.32974288" />
+      <window_info anchor="bottom" id="Duplicates" order="7" weight="0.32974288" />
+      <window_info anchor="right" id="Code Provenance" side_tool="true" />
+      <window_info anchor="right" id="Endpoints" />
+      <window_info anchor="right" id="Coverage" side_tool="true" />
+      <window_info anchor="right" content_ui="combo" id="Notifications" order="0" weight="0.25" />
+      <window_info anchor="right" id="AIAssistant" order="1" weight="0.25" />
+      <window_info anchor="right" id="Database" order="2" weight="0.23828125" />
+      <window_info anchor="right" id="Gradle" order="3" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="4" weight="0.25" />
+    </layout>
+  </component>
+  <component name="RunManager">
+    <configuration name="DatabaseInit" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="de.hsos.vs.database.DatabaseInit" />
+      <module name="Verposter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="de.hsos.vs.database.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.DatabaseInit" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.33813.14" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.33813.14" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d7408b15-8a13-452a-9e72-530517c7d91e" name="Changes" comment="" />
+      <created>1785840131312</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1785840131312</updated>
+      <workItem from="1785840132773" duration="2870000" />
+      <workItem from="1785846119959" duration="22464000" />
+      <workItem from="1786378819085" duration="25000" />
+      <workItem from="1786378928560" duration="658000" />
+      <workItem from="1786379771462" duration="9647000" />
+      <workItem from="1786445754311" duration="28138000" />
+      <workItem from="1786616686708" duration="984000" />
+    </task>
+    <task id="LOCAL-00001" summary="Entitäten und Seitenstruktur">
+      <option name="closed" value="true" />
+      <created>1785850228769</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1785850228769</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Neue Projektstruktur">
+      <option name="closed" value="true" />
+      <created>1786027736690</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1786027736691</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Datenbank angefangen">
+      <option name="closed" value="true" />
+      <created>1786029515945</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1786029515945</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Entities kontrolliert">
+      <option name="closed" value="true" />
+      <created>1786351772925</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1786351772925</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Datenbank vom Trecking entfernt">
+      <option name="closed" value="true" />
+      <created>1786352118036</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1786352118036</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Minor fixes datenbank">
+      <option name="closed" value="true" />
+      <created>1786352903098</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1786352903098</updated>
+    </task>
+    <task id="LOCAL-00007" summary="paar fixes">
+      <option name="closed" value="true" />
+      <created>1786355113295</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1786355113295</updated>
+    </task>
+    <task id="LOCAL-00008" summary="weitere fixes">
+      <option name="closed" value="true" />
+      <created>1786361707986</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1786361707986</updated>
+    </task>
+    <task id="LOCAL-00009" summary="alles noch besser gemacht für rest api sachen">
+      <option name="closed" value="true" />
+      <created>1786383733843</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1786383733843</updated>
+    </task>
+    <task id="LOCAL-00010" summary="minor fix">
+      <option name="closed" value="true" />
+      <created>1786383828600</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1786383828600</updated>
+    </task>
+    <task id="LOCAL-00011" summary="wenn nutzer bereits im raum dann wird er einfach an den raum weitergeleitet ohne error">
+      <option name="closed" value="true" />
+      <created>1786384268124</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1786384268124</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Bereit Flag">
+      <option name="closed" value="true" />
+      <created>1786385727750</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1786385727750</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Redirect nachdem alle im Raum Bereit sind außerdem Raum verlassen">
+      <option name="closed" value="true" />
+      <created>1786455159624</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1786455159625</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Alle Spieler in einem Raum bekommen das gleiche Wort oder der Verpsoter einen Tipp">
+      <option name="closed" value="true" />
+      <created>1786461155008</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1786461155008</updated>
+    </task>
+    <task id="LOCAL-00015" summary="gönn dir">
+      <option name="closed" value="true" />
+      <created>1786461418315</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1786461418315</updated>
+    </task>
+    <task id="LOCAL-00016" summary="FINALE!!!">
+      <option name="closed" value="true" />
+      <created>1786565063495</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1786565063495</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Warnungen bearbeitet">
+      <option name="closed" value="true" />
+      <created>1786565897675</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1786565897675</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Warnungen bearbeitet">
+      <option name="closed" value="true" />
+      <created>1786565992778</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1786565992778</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Entitäten und Seitenstruktur" />
+    <MESSAGE value="Neue Projektstruktur" />
+    <MESSAGE value="Datenbank angefangen" />
+    <MESSAGE value="Entities kontrolliert" />
+    <MESSAGE value="Datenbank vom Trecking entfernt" />
+    <MESSAGE value="Minor fixes datenbank" />
+    <MESSAGE value="paar fixes" />
+    <MESSAGE value="weitere fixes" />
+    <MESSAGE value="alles noch besser gemacht für rest api sachen" />
+    <MESSAGE value="minor fix" />
+    <MESSAGE value="wenn nutzer bereits im raum dann wird er einfach an den raum weitergeleitet ohne error" />
+    <MESSAGE value="Bereit Flag" />
+    <MESSAGE value="Redirect nachdem alle im Raum Bereit sind außerdem Raum verlassen" />
+    <MESSAGE value="Alle Spieler in einem Raum bekommen das gleiche Wort oder der Verpsoter einen Tipp" />
+    <MESSAGE value="gönn dir" />
+    <MESSAGE value="FINALE!!!" />
+    <MESSAGE value="Warnungen bearbeitet" />
+    <option name="LAST_COMMIT_MESSAGE" value="Warnungen bearbeitet" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
