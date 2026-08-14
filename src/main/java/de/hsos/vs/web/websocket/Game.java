@@ -60,8 +60,7 @@ public class Game {
         if (!gameRoom.isRoundStarted() && gameRoom.getPlayerCount() >= MIN_PLAYERS) {
             gameRoom.setCurrentWord(chooseGameWord());
             gameRoom.setImposterUserId(chooseImposter(gameRoom));
-            gameRoom.setRoundStarted(true);
-            Voting.startRoundTimer(gameRoom);
+            gameRoom.startRound();
             for (Session player : gameRoom.getPlayers().values()) {
                 sendCard(player, gameRoom);
             }

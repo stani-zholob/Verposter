@@ -5,6 +5,8 @@ import jakarta.websocket.Session;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Speichert alles für session und game damit alles mit websockets funktioniert
@@ -12,6 +14,8 @@ import java.util.Map;
  * @author Stanislav, Lukas
  */
 public class GameRoom {
+    private static final int ROUND_SECONDS = 120;
+
     private final Map<String, Session> playersBySessionId = new HashMap<>();
     private final Map<String, Session> voteSessionsBySessionId = new HashMap<>();
     private final Map<Integer, Integer> votesByUserId = new HashMap<>();
@@ -88,6 +92,63 @@ public class GameRoom {
 
     public void removeVoteSession(Session session) {
         voteSessionsBySessionId.remove(session.getId());
+    }
+
+    /**
+     * startet die runde und den timer der nach 120s von alleine aufdeckt
+     *
+     * @author Lukas
+     */
+    public void startRound() {
+        roundStarted = true;
+        roundEndsAt = System.currentTimeMillis() + ROUND_SECONDS * 1000;
+
+        System.out.println("RUNDE GESTARTET, ENDE IN " + ROUND_SECONDS + " SEKUNDEN");
+
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                reveal();
+            }
+        }, ROUND_SECONDS * 1000);
+
+        // nur die startzeit schicken, runterzaehlen macht der client selber
+        for (Session session : voteSessionsBySessionId.values()) {
+            session.getAsyncRemote().sendText("TIME:" + getRemainingSeconds());
+        }
+    }
+
+    /**
+     * Deckt auf wer der Verposter war und schickt das an alle im raum.
+     * synchronized weil der timer-thread und der websocket-thread gleichzeitig
+     * hier reinlaufen koennen, sonst wird evtl 2x aufgedeckt
+     *
+     * @author Lukas
+     */
+    public synchronized void reveal() {
+        if (revealed) {
+            return;
+        }
+        revealed = true;
+
+        String name = "Niemand";
+        for (Session player : playersBySessionId.values()) {
+            Integer playerId = (Integer) player.getUserProperties().get("userId");
+            if (playerId != null && playerId.equals(imposterUserId)) {
+                name = (String) player.getUserProperties().get("username");
+            }
+        }
+
+        String wort = "unbekannt";
+        if (currentWord != null) {
+            wort = currentWord.getWord();
+        }
+
+        String text = "REVEAL:" + name + " war der Verposter. Das Wort war: " + wort;
+        for (Session session : voteSessionsBySessionId.values()) {
+            session.getAsyncRemote().sendText(text);
+        }
     }
 
     // pro Spieler nur eine Stimme, eine neue ersetzt die alte

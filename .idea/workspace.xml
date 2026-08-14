@@ -6,21 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="d7408b15-8a13-452a-9e72-530517c7d91e" name="Changes" comment="Warnungen bearbeitet">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsos/vs/database/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsos/vs/database/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsos/vs/entities/Lobby.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsos/vs/entities/Lobby.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsos/vs/entities/Word.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsos/vs/entities/Word.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsos/vs/util/HttpSessionConfigurator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsos/vs/util/HttpSessionConfigurator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsos/vs/util/ServletFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsos/vs/util/ServletFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsos/vs/web/servlet/CreateRoomServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsos/vs/web/servlet/CreateRoomServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsos/vs/web/servlet/GameStartServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsos/vs/web/servlet/GameStartServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsos/vs/web/servlet/LobbyServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsos/vs/web/servlet/LobbyServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsos/vs/web/servlet/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsos/vs/web/servlet/LoginServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsos/vs/web/servlet/LogoutServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsos/vs/web/servlet/LogoutServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsos/vs/web/servlet/RegisterServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsos/vs/web/servlet/RegisterServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsos/vs/web/servlet/RoomServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsos/vs/web/servlet/RoomServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsos/vs/web/servlet/TopicServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsos/vs/web/servlet/TopicServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/hsos/vs/web/websocket/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsos/vs/web/websocket/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/room.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/room.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsos/vs/web/websocket/GameRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsos/vs/web/websocket/GameRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsos/vs/web/websocket/Voting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsos/vs/web/websocket/Voting.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,23 +87,23 @@
       <window_info id="Backup and Sync History" />
       <window_info id="Pull Requests" />
       <window_info id="Learn" show_stripe_button="false" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19036458" />
-      <window_info id="Commit" order="1" weight="0.12871094" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.22942708" />
+      <window_info active="true" id="Commit" order="1" visible="true" weight="0.22942708" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="TypeScript" />
       <window_info anchor="bottom" id="Profiler" />
-      <window_info anchor="bottom" id="Build" />
       <window_info anchor="bottom" id="TODO" />
       <window_info anchor="bottom" id="File Transfer" />
-      <window_info anchor="bottom" id="Version Control" order="0" weight="0.33020833" />
+      <window_info anchor="bottom" id="Version Control" order="0" weight="0.32974288" />
       <window_info anchor="bottom" id="Problems" order="1" />
-      <window_info anchor="bottom" id="Problems View" order="2" weight="0.32974288" />
+      <window_info anchor="bottom" id="Problems View" order="2" weight="0.32947174" />
       <window_info anchor="bottom" id="Terminal" order="3" weight="0.32974288" />
       <window_info anchor="bottom" id="Services" order="4" />
       <window_info anchor="bottom" id="Run" order="5" weight="0.32974288" />
       <window_info anchor="bottom" id="Find" order="6" weight="0.32974288" />
       <window_info anchor="bottom" id="Duplicates" order="7" weight="0.32974288" />
+      <window_info anchor="bottom" id="Build" order="8" weight="0.32974288" />
       <window_info anchor="right" id="Code Provenance" side_tool="true" />
       <window_info anchor="right" id="Endpoints" />
       <window_info anchor="right" id="Coverage" side_tool="true" />
@@ -168,6 +156,7 @@
       <workItem from="1786379771462" duration="9647000" />
       <workItem from="1786445754311" duration="28138000" />
       <workItem from="1786616686708" duration="984000" />
+      <workItem from="1786726127683" duration="2070000" />
     </task>
     <task id="LOCAL-00001" summary="Entitäten und Seitenstruktur">
       <option name="closed" value="true" />
