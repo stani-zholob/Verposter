@@ -2,6 +2,7 @@ package de.hsos.vs.web.websocket;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Verwaltung der laufenden Spiele wird von game und voting gemeinsam benutzt
@@ -15,7 +16,7 @@ public class GameRoomRegistry {
         return gameRoomsById.get(roomId);
     }
 
-    public static GameRoom getOrCreate(int roomId) {
+    public synchronized static GameRoom getOrCreate(int roomId) {
         GameRoom gameRoom = gameRoomsById.get(roomId);
         if (gameRoom == null) {
             gameRoom = new GameRoom();

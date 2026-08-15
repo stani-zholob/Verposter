@@ -13,7 +13,8 @@ public class Voting {
 
 
     /**
-     * todo doku
+     * prüft die http-session, verbided den Spieler mit der Abstimmung
+     * und sendet bei laufenden Runde die verbleibende Zeit
      *
      * @author Lukas, Stanislav
      */
@@ -46,7 +47,8 @@ public class Voting {
     }
 
     /**
-     * todo doku
+     * liest die gewählte Spieler ID, speichert die Stimme
+     * und beendet die Runde soblad alle notwendigen Stimmen vorliegen
      *
      * @author Lukas, Stanislav
      */
@@ -81,7 +83,7 @@ public class Voting {
     }
 
     /**
-     * todo doku
+     * entfernt die Verbindung aus dem Raum
      *
      * @author Lukas, Stanislav
      */

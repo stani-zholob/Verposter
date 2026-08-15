@@ -26,5 +26,4 @@ public class CreateRoomServlet extends HttpServlet {
         }
         req.getRequestDispatcher("/createroom.html").forward(req, resp);
     }
-
 }

@@ -107,7 +107,7 @@ public class Game {
             text = "Kein Wort gefunden";
         } else if (userId != null && userId.equals(gameRoom.getImposterUserId())) {
             text = "Du bist der Verposter\n";
-            text += "Der Tipp lautet: \n";
+            text += "\nDer Tipp lautet: \n";
             text += currentWord.getHint();
         } else {
             text = currentWord.getWord();
