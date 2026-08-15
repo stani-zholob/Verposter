@@ -156,8 +156,11 @@ public class GameRoom {
         votesByUserId.put(voterUserId, targetUserId);
     }
 
-    // Der Verposter muss nicht mitwählen, sonst könnte er die Runde
-    // aufhalten, indem er einfach nichts anklickt.
+    /** Der Verposter muss nicht mitwählen, sonst könnte er die Runde
+     * aufhalten, indem er einfach nichts anklickt.
+     *
+     * @author Lukas
+     */
     public boolean allPlayersVoted() {
         int votes = 0;
         for (Integer voterUserId : votesByUserId.keySet()) {

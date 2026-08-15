@@ -13,10 +13,10 @@ public class Voting {
 
 
     /**
-     * prüft die http-session, verbided den Spieler mit der Abstimmung
+     * prüft die http-session, verbindet den Spieler mit der Abstimmung
      * und sendet bei laufenden Runde die verbleibende Zeit
      *
-     * @author Lukas, Stanislav
+     * @author Lukas
      */
     @OnOpen
     public void onOpen(Session wsSession, EndpointConfig config, @PathParam("roomId") int roomId) {
@@ -40,7 +40,7 @@ public class Voting {
         GameRoom gameRoom = GameRoomRegistry.getOrCreate(roomId);
         gameRoom.addVoteSession(wsSession);
 
-        // runde laeuft evtl schon, z.b. wenn einer F5 drueckt
+        // runde läuft evtl schon, z.b. wenn einer F5 drueckt
         if (gameRoom.isRoundStarted() && !gameRoom.isRevealed()) {
             wsSession.getAsyncRemote().sendText("TIME:" + gameRoom.getRemainingSeconds());
         }
@@ -48,9 +48,9 @@ public class Voting {
 
     /**
      * liest die gewählte Spieler ID, speichert die Stimme
-     * und beendet die Runde soblad alle notwendigen Stimmen vorliegen
+     * und beendet die Runde sobald alle notwendigen Stimmen vorliegen
      *
-     * @author Lukas, Stanislav
+     * @author Lukas
      */
     @OnMessage
     public void onMessage(String message, Session session) {
@@ -85,7 +85,7 @@ public class Voting {
     /**
      * entfernt die Verbindung aus dem Raum
      *
-     * @author Lukas, Stanislav
+     * @author Lukas
      */
     @OnClose
     public void onClose(Session session) throws IOException {
