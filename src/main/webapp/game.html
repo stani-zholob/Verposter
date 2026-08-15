@@ -30,11 +30,9 @@
 
     // Adresse aus der aktuellen Seite ableiten, damit das Spiel auch von einem
     // anderen Rechner im Netz laeuft und nicht nur auf localhost
-    const wsProtocol = location.protocol === "https:" ? "wss:" : "ws:";
-    const wsBase = `${wsProtocol}//${location.host}/Verposter/ws/rooms/${roomId}`;
 
-    const socket = new WebSocket(wsBase);
-    const voteSocket = new WebSocket(`${wsBase}/vote`);
+    const socket = new WebSocket(`ws://${location.host}/Verposter/ws/rooms/${roomId}`);
+    const voteSocket = new WebSocket(`ws://${location.host}/Verposter/ws/rooms/${roomId}/vote`);
 
     socket.onopen = () => {
         console.log("verbunden")
